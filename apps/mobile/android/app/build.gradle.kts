@@ -110,7 +110,7 @@ android {
         abortOnError = true
         checkReleaseBuilds = true
         warningsAsErrors = true
-        disable += setOf("GradleDependency", "AndroidGradlePluginVersion")
+        disable += setOf("GradleDependency", "AndroidGradlePluginVersion", "OldTargetApi")
     }
 }
 

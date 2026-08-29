@@ -50,3 +50,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-29.
 - Decision: usar `demo` para Billing simulado y anuncios oficiales de prueba, reservar `play` para Google Play Billing, AdMob/UMP y firma comercial, y registrar la app como perfil Android nativo en Apps Dashboard 0.2.11.
 - Motivo: permitir QA local seguro sin credenciales ni cobros, manteniendo preparado el camino comercial y el flujo operativo compartido.
+
+## D-008 - API 36 estable y `OldTargetApi` aislado
+
+- Estado: vigente.
+- Fecha: 2026-08-29.
+- Decision: conservar Android 16 / API 36 como `compileSdk` y `targetSdk`, fijar ese SDK en CI y deshabilitar unicamente `OldTargetApi`; el resto de Android Lint continua con `warningsAsErrors` y `abortOnError`.
+- Motivo: API 36 cumple el requisito vigente de Google Play y Android 17 / API 37 sigue documentado como opt-in Preview; el runner conoce API 37 y elevaba esa unica advertencia ambiental a error, aunque el SDK 37 no esta disponible como plataforma estable en los repositorios locales.

@@ -6,7 +6,7 @@ Entregar Gemidos PREMIUM como aplicacion Android nativa mantenible: cuenta regre
 
 ## Tarea actual
 
-La version inicial 0.1.0 esta entregada. No hay trabajo local en curso.
+La version inicial 0.1.0 y la correccion del CI estan entregadas. No hay trabajo local en curso.
 
 ## Estado actual
 
@@ -19,6 +19,7 @@ La version inicial 0.1.0 esta entregada. No hay trabajo local en curso.
 - El selector conserva las 21 opciones de idioma de Linterna Premium y todos los textos visibles especificos tienen catalogo completo.
 - Audio: `LollipopMoans` de jshine7/Freesound mediante Pixabay, 38,28 s, 765600 bytes y SHA-256 `F12F8367AD8D20A9240E55720A02B9AD2C9216D83609C7322E28792305E4A176`; origen/licencia documentados en `docs/AUDIO_LICENSE.md`.
 - Validacion: `npm test`, `npm run test:android`, `npm run coverage` y `npm run lint` correctos; 18 pruebas, cero fallos y cobertura 100% en instrucciones, ramas, lineas, complejidad, metodos y clases del dominio medido.
+- El run CI inicial `33278253748` fallo solo en Android Lint: el runner conoce API 37 Preview y, con `warningsAsErrors`, elevo `OldTargetApi` sobre `targetSdk = 36`. Se mantiene API 36 estable y se deshabilita unicamente ese diagnostico; el resto de lint sigue estricto. `tools/verify-project.mjs` protege este contrato.
 - Apps Dashboard 0.2.11 incorpora `gemidos-premium` como cuarto perfil bundled Android nativo. La carga real valido la raiz Git; commit del Dashboard `056e26c` publicado en `main`.
 - No se genero APK. El usuario puede iniciar `demoRelease` desde Apps Dashboard cuando quiera un artefacto instalable.
 - Escaneo local de secretos sin hallazgos. GitHub rechazo Secret Scanning/Push Protection con HTTP 422 porque no esta disponible para este repositorio privado personal; el bloqueo figura inline en BACKLOG.

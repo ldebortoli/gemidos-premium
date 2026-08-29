@@ -8,7 +8,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 
 - Ruta: `<project-root>`
 - Version: `0.1.0` (`versionCode` 1).
-- Stack: Android nativo, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
+- Stack: Android nativo sobre Android 16 / API 36, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
 - Git: repositorio privado `ldebortoli/gemidos-premium`.
 - Rama primaria: `main`.
 - Remoto origin: `https://github.com/ldebortoli/gemidos-premium.git`.
@@ -26,6 +26,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 
 - Validacion verificada: `npm test`, `npm run test:android`, `npm run coverage` y `npm run lint`.
 - Baseline: 18 pruebas Android, cero fallos, y 100% en instrucciones, ramas, lineas, complejidad, metodos y clases del dominio medido.
+- CI fija API 36 y conserva Android Lint estricto; solo `OldTargetApi` esta deshabilitado porque el runner conoce el SDK 37 Preview y elevaba ese aviso ambiental a error.
 - El APK se generara desde Apps Dashboard o solo por pedido explicito; la implementacion ordinaria no inicia Gradle para ensamblar un artefacto.
 - El audio integrado dura 38,28 segundos y su SHA-256 es `F12F8367AD8D20A9240E55720A02B9AD2C9216D83609C7322E28792305E4A176`.
 - GitHub Secret Scanning y Push Protection no estan disponibles para este repositorio privado personal; se conserva el escaneo local y el bloqueo exacto en BACKLOG.

@@ -18,6 +18,7 @@ const requiredFiles = [
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt",
   "apps/mobile/android/app/src/demo/AndroidManifest.xml",
   "apps/mobile/android/app/src/play/AndroidManifest.xml",
+  ".github/workflows/ci.yml",
   "docs/AUDIO_LICENSE.md",
   "docs/CONFIGURACION_GOOGLE.md",
   "docs/PRIVACIDAD.md",
@@ -36,6 +37,7 @@ if (errors.length === 0) {
   const localization = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt");
   const manifest = read("apps/mobile/android/app/src/main/AndroidManifest.xml");
   const gradle = read("apps/mobile/android/app/build.gradle.kts");
+  const ciWorkflow = read(".github/workflows/ci.yml");
   const mobilePackage = JSON.parse(read("apps/mobile/package.json"));
   const appConfig = JSON.parse(read("apps/mobile/app.json"));
   const strings = read("apps/mobile/android/app/src/main/res/values/strings.xml");
@@ -88,6 +90,14 @@ if (errors.length === 0) {
     mobilePackage.scripts["build:apk"] !== "node ../../tools/run-gradle.mjs assembleDemoRelease"
   ) {
     errors.push("La APK interna debe ser demoRelease con la identidad QA estable");
+  }
+  if (
+    !gradle.includes("compileSdk = 36") ||
+    !gradle.includes("targetSdk = 36") ||
+    !gradle.includes('"OldTargetApi"') ||
+    !ciWorkflow.includes("platforms;android-36 build-tools;36.0.0")
+  ) {
+    errors.push("CI debe fijar API 36 y aislar unicamente el aviso ambiental OldTargetApi");
   }
   if (manifest.includes("CAMERA") || manifest.includes("RECORD_AUDIO") || manifest.includes("READ_CONTACTS")) {
     errors.push("La app no debe solicitar camara, microfono ni contactos");
