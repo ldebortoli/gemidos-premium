@@ -34,8 +34,10 @@ El MP3 fuente de Descargas no se copia al repositorio; solo se versiona la edici
 - Archivo integrado: `apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg`.
 - Formato: Ogg Vorbis, 44,1 kHz, mono.
 - Duración verificada: 15,000 segundos.
-- Tamaño verificado: 96.796 bytes.
-- SHA-256: `F75147862BFD24C6B60CFF0A1E0142431E7A994765CC9E862B5F712F08039DF1`.
+- Tamaño verificado: 51.546 bytes.
+- SHA-256: `7118D61B5A8B259B188FF898BC6B09658525BA2C27B36A2BFA800DA36E7930D1`.
 - Fecha de creación y verificación: 2026-08-31.
 
-Esta pista fue sintetizada específicamente para el proyecto, sin grabaciones ni muestras de terceros. Combina clics mecánicos de carrete, campanillas/monedas periódicas y cinco fanfarrias armónicas de premio. No se reproduce en loop: acompaña una sola vez los 15 segundos de la celebración Premium y se interrumpe si la app sale de primer plano o el usuario reinicia la experiencia.
+Esta pista fue generada específicamente para el proyecto, sin grabaciones ni muestras de terceros. Conserva cinco fanfarrias armónicas de premio y agrega cinco ráfagas breves de aplausos sintetizados y voces generadas localmente (`¡Hurra!`, `¡Vamos!`, `¡Premio!`, `¡Bravo!` y `Woohoo!`). No contiene una base mecánica ni otro sonido constante: cada bloque está separado por aproximadamente un segundo de silencio real. No se reproduce en loop y se interrumpe si la app sale de primer plano o el usuario reinicia la experiencia.
+
+El generador reproducible vive en `tools/generate-premium-celebration.ps1` y se ejecuta con `pwsh -NoProfile -File tools/generate-premium-celebration.ps1`. Usa FFmpeg más las voces locales de Windows, fija las semillas de ruido y el número de serie OGG, y no descarga recursos de red.

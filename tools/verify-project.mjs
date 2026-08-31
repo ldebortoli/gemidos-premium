@@ -21,6 +21,7 @@ const requiredFiles = [
   "apps/mobile/android/app/src/demo/AndroidManifest.xml",
   "apps/mobile/android/app/src/play/AndroidManifest.xml",
   ".github/workflows/ci.yml",
+  "tools/generate-premium-celebration.ps1",
   "docs/AUDIO_LICENSE.md",
   "docs/CONFIGURACION_GOOGLE.md",
   "docs/PRIVACIDAD.md",
@@ -36,6 +37,7 @@ if (errors.length === 0) {
   const mainActivity = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/MainActivity.kt");
   const audioPort = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPrankAudioPort.kt");
   const premiumAudio = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPremiumCelebrationAudio.kt");
+  const premiumAudioGenerator = read("tools/generate-premium-celebration.ps1");
   const screen = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/ui/GemidosPremiumScreen.kt");
   const localization = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt");
   const manifest = read("apps/mobile/android/app/src/main/AndroidManifest.xml");
@@ -99,6 +101,16 @@ if (errors.length === 0) {
   ) {
     errors.push("La celebracion Premium debe reproducir una vez sus sonidos y detenerlos con el ciclo de vida");
   }
+  if (
+    !premiumAudioGenerator.includes('Text = "¡Hurra!"') ||
+    !premiumAudioGenerator.includes('Text = "¡Bravo!"') ||
+    !premiumAudioGenerator.includes("$jingleDelays") ||
+    !premiumAudioGenerator.includes("$clapDelays") ||
+    premiumAudioGenerator.includes("mod(t\\,0.12)") ||
+    premiumAudioGenerator.includes("mod(t\\,0.31)")
+  ) {
+    errors.push("La pista Premium debe tener festejos puntuales sin base mecanica constante");
+  }
   if (appConfig.app.name !== "Gemidos PREMIUM" || appConfig.app.android.package !== "com.gemidospremium.app") {
     errors.push("La identidad visible y el paquete deben pertenecer a Gemidos PREMIUM");
   }
@@ -151,8 +163,8 @@ if (errors.length === 0) {
   const premiumAudioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg");
   const premiumAudioAsset = fs.readFileSync(premiumAudioPath);
   const premiumAudioHash = crypto.createHash("sha256").update(premiumAudioAsset).digest("hex").toUpperCase();
-  if (premiumAudioAsset.length !== 96796) errors.push("La pista Premium no coincide con el recurso verificado");
-  if (premiumAudioHash !== "F75147862BFD24C6B60CFF0A1E0142431E7A994765CC9E862B5F712F08039DF1") {
+  if (premiumAudioAsset.length !== 51546) errors.push("La pista Premium no coincide con el recurso verificado");
+  if (premiumAudioHash !== "7118D61B5A8B259B188FF898BC6B09658525BA2C27B36A2BFA800DA36E7930D1") {
     errors.push("El hash de los sonidos Premium no coincide con el recurso original documentado");
   }
 }

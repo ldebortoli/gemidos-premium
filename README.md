@@ -11,7 +11,7 @@ La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de 
 - Reproducción local en loop, sin red, de un MP3 editado de 9,86 segundos.
 - Volumen multimedia temporal al máximo, foco transitorio y restauración idempotente.
 - Apagado plebeyo como texto pequeño: corta gratis y reinicia la cuenta automáticamente, sin pantalla intermedia.
-- Apagado Premium extragrande con fade, cinco tragamonedas distribuidas, luces, confeti, múltiples fuegos artificiales, felicitación localizada y sonidos originales de carretes, monedas y premios durante 15 segundos.
+- Apagado Premium extragrande con fade, cinco tragamonedas distribuidas, luces, confeti, múltiples fuegos artificiales, felicitación localizada y cinco festejos puntuales con fanfarria, aplausos y vítores durante 15 segundos.
 - Compra simulada en `demo`; Google Play Billing real preparado en `play`.
 - Banner de prueba en `demo`; AdMob/UMP preparado en `play`.
 - Selector persistente con las 21 opciones de idioma de Linterna PREMIUM.

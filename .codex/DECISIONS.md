@@ -92,3 +92,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: acompanar la celebracion con una pista Ogg Vorbis mono de 15 segundos sintetizada para el proyecto, compuesta por clics de carrete, monedas/campanillas y cinco fanfarrias; reproducirla una vez, a volumen relativo moderado, sin tomar muestras externas y con detencion explicita al pausar, destruir, reiniciar o restablecer Premium.
 - Motivo: agregar sonido de tragamonedas y premios sin depender de material de terceros, sin repetir decodificacion de multiples efectos cortos y sin comprometer el restaurado seguro del audio principal.
+
+## D-014 - Festejos puntuales sin sonido constante
+
+- Estado: vigente; reemplaza la composicion sonora definida en D-013.
+- Fecha: 2026-08-31.
+- Decision: quitar toda base mecanica/monedas repetitivas; conservar cinco fanfarrias de premio y acompanarlas con cinco rafagas puntuales de aplausos sintetizados y vitores generados mediante voces locales de Windows (`Hurra`, `Vamos`, `Premio`, `Bravo` y `Woohoo`), dejando aproximadamente un segundo de silencio real entre bloques.
+- Motivo: preservar el sonido de ganar aprobado por el usuario, eliminar la textura constante rechazada y hacer que cada evento de festejo tenga contraste y descanso audible.
