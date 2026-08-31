@@ -29,6 +29,10 @@ class GemidosLocalizationTest {
             assertFalse(copy[TextKey.TURN_ON].contains("linterna", ignoreCase = true))
             assertFalse(copy[TextKey.FLASHLIGHT_ICON].contains("flashlight", ignoreCase = true))
         }
+        assertEquals(
+            "Se viene...",
+            GemidosTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)[TextKey.READY_TO_LIGHT],
+        )
     }
 
     @Test

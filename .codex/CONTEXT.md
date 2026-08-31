@@ -2,7 +2,7 @@
 
 ## Descripcion general
 
-Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una cuenta regresiva visible de 10 a 0; al finalizar solicita foco de audio, lleva temporalmente el canal multimedia al maximo y reproduce un efecto de gemidos integrado. Siempre ofrece un apagado plebeyo gratuito e inmediato y un apagado Premium de presentacion exagerada, sin impedir que el usuario silencie la app.
+Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una cuenta regresiva visible de 10 a 0; al finalizar solicita foco de audio, lleva temporalmente el canal multimedia al maximo y reproduce en loop un efecto de gemidos integrado. Siempre ofrece un apagado plebeyo gratuito e inmediato y un apagado Premium de presentacion exagerada, sin impedir que el usuario silencie la app.
 
 ## Estado detectado
 
@@ -28,7 +28,8 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - Baseline: 18 pruebas Android, cero fallos, y 100% en instrucciones, ramas, lineas, complejidad, metodos y clases del dominio medido.
 - CI fija API 36 y conserva Android Lint estricto; solo `OldTargetApi` esta deshabilitado porque el runner conoce el SDK 37 Preview y elevaba ese aviso ambiental a error.
 - El APK se generara desde Apps Dashboard o solo por pedido explicito; la implementacion ordinaria no inicia Gradle para ensamblar un artefacto.
-- El audio integrado dura 38,28 segundos y su SHA-256 es `F12F8367AD8D20A9240E55720A02B9AD2C9216D83609C7322E28792305E4A176`.
+- El audio integrado es una edicion de 9,863 segundos del MP3 suministrado por el usuario, reproducida en loop; su SHA-256 es `D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E`.
+- El contador muestra solo `Se viene...` sobre el numero. Apagado plebeyo es texto pequeno y reinicia directamente en 10; Premium conserva el desenlace silenciado y una celebracion de 3,2 segundos con tragamonedas, luces, particulas y cinco fuegos artificiales.
 - GitHub Secret Scanning y Push Protection no estan disponibles para este repositorio privado personal; se conserva el escaneo local y el bloqueo exacto en BACKLOG.
 
 ## Convenciones
@@ -38,4 +39,5 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - La memoria persistente vive en `.codex/` y se carga siguiendo `AGENTS.md`.
 - Si el proyecto tiene una UI para controlar un bot, servidor o proceso en segundo plano, cerrar esa UI debe detener el proceso administrado cuando sea tecnicamente posible.
 - El apagado plebeyo debe permanecer visible, gratuito e inmediato mientras suena el audio.
-- La app restaura el volumen multimedia previo y libera el foco de audio al apagar, terminar, salir o cerrarse.
+- La app restaura el volumen multimedia previo y libera el foco de audio al apagar, perder foco, salir o cerrarse.
+- Los archivos de texto versionados se normalizan a LF mediante `.gitattributes`; scripts batch conservan CRLF y los recursos binarios se marcan explicitamente.

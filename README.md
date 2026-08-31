@@ -2,15 +2,16 @@
 
 Aplicación Android humorística inspirada en la experiencia de Linterna PREMIUM. Al abrirla muestra una cuenta regresiva de 10 a 0 y, al llegar a cero, reproduce un clip de gemidos integrado al máximo volumen multimedia permitido por el dispositivo.
 
-La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de inmediato. **APAGADO PREMIUM** ofrece una compra única y, cuando está activo, aplica un fade ceremonial con confeti. Al detenerse, terminar el clip, cambiar de app o cerrar la actividad, se libera el foco de audio y se restaura el volumen multimedia anterior.
+La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de inmediato. **APAGADO PREMIUM** ofrece una compra única y, cuando está activo, aplica un fade ceremonial con confeti. Al detenerse, perder foco, cambiar de app o cerrar la actividad, se libera el foco de audio y se restaura el volumen multimedia anterior.
 
 ## Alcance de la versión 0.1.0
 
 - Android nativo con Kotlin, Jetpack Compose y Material 3.
 - Cuenta regresiva automática de diez segundos.
-- Reproducción local sin red de un MP3 de 38,28 segundos.
+- Reproducción local en loop, sin red, de un MP3 editado de 9,86 segundos.
 - Volumen multimedia temporal al máximo, foco transitorio y restauración idempotente.
-- Apagado plebeyo gratuito y Apagado Premium extragrande.
+- Apagado plebeyo como texto pequeño: corta gratis y reinicia la cuenta automáticamente, sin pantalla intermedia.
+- Apagado Premium extragrande con fade, tragamonedas, luces, confeti y múltiples fuegos artificiales.
 - Compra simulada en `demo`; Google Play Billing real preparado en `play`.
 - Banner de prueba en `demo`; AdMob/UMP preparado en `play`.
 - Selector persistente con las 21 opciones de idioma de Linterna PREMIUM.
@@ -55,6 +56,7 @@ La generación nativa se inicia desde Apps Dashboard. No se construye una APK co
 - No solicita cámara, micrófono, contactos, ubicación ni almacenamiento.
 - No graba audio: solo reproduce el recurso integrado.
 - El contenido vocal es sugerente y debe declararse correctamente en la clasificación de contenido antes de una publicación comercial.
+- El archivo actual fue suministrado por el propietario del proyecto y transformado, pero esa edición no constituye por sí sola una autorización de derechos; hay que confirmar su licencia antes de distribuir públicamente.
 - La app modifica temporalmente el volumen multimedia global; guarda el valor anterior y lo restaura al finalizar o salir.
 - Android, controles parentales, límites de volumen seguro o políticas del fabricante pueden impedir alcanzar el máximo físico.
 - Compras y anuncios quedan detrás de los SDK oficiales de Google. No se versionan credenciales, keystores ni IDs publicables.

@@ -850,7 +850,7 @@ object GemidosTextCatalog {
 
     private val prankOverridesBase = mapOf(
         AppLanguage.SPANISH_ARGENTINA to prankCatalog(
-            "Prepará los oídos",
+            "Se viene...",
             "Cuando llegue a cero, el audio sonará al máximo volumen.",
             "Reiniciar cuenta regresiva",
             "Apagado Premium en curso",
@@ -869,7 +869,7 @@ object GemidosTextCatalog {
             "Compra cancelada. El audio sigue sonando; podés usar Apagado plebeyo.",
         ),
         AppLanguage.SPANISH_SPAIN to prankCatalog(
-            "Prepara los oídos",
+            "Se viene...",
             "Cuando llegue a cero, el audio sonará al máximo volumen.",
             "Reiniciar cuenta atrás",
             "Apagado Premium en curso",
@@ -888,7 +888,7 @@ object GemidosTextCatalog {
             "Compra cancelada. El audio sigue sonando; puedes usar Apagado plebeyo.",
         ),
         AppLanguage.ENGLISH to prankCatalog(
-            "Prepare your ears",
+            "It's coming...",
             "When the countdown reaches zero, the audio will play at maximum volume.",
             "Restart countdown",
             "Premium shutdown in progress",
@@ -907,7 +907,7 @@ object GemidosTextCatalog {
             "Purchase cancelled. The audio is still playing; you can use Plebeian shutdown.",
         ),
         AppLanguage.RUSSIAN to prankCatalog(
-            "Приготовьте уши",
+            "Сейчас начнётся...",
             "Когда отсчёт дойдёт до нуля, звук включится на максимальной громкости.",
             "Перезапустить отсчёт",
             "Выполняется Premium-выключение",
@@ -926,7 +926,7 @@ object GemidosTextCatalog {
             "Покупка отменена. Звук продолжает играть; используйте плебейское выключение.",
         ),
         AppLanguage.LATIN to prankCatalog(
-            "Aures para",
+            "Iam venit...",
             "Cum numerus ad zerum pervenerit, sonus maxima voce ludetur.",
             "Numerationem renova",
             "Silentium Premium agitur",
@@ -945,7 +945,7 @@ object GemidosTextCatalog {
             "Emptio omissa est. Sonus adhuc ludit; silentio plebeio uti potes.",
         ),
         AppLanguage.JAPANESE to prankCatalog(
-            "耳の準備をしてください",
+            "もうすぐ...",
             "カウントがゼロになると、最大音量で音声が再生されます。",
             "カウントダウンをやり直す",
             "Premium 停止中",
@@ -964,7 +964,7 @@ object GemidosTextCatalog {
             "購入をキャンセルしました。音声は再生中です。庶民の停止を使えます。",
         ),
         AppLanguage.ITALIAN to prankCatalog(
-            "Prepara le orecchie",
+            "Sta arrivando...",
             "Quando il conto arriva a zero, l'audio partirà al massimo volume.",
             "Riavvia il conto alla rovescia",
             "Spegnimento Premium in corso",
@@ -983,7 +983,7 @@ object GemidosTextCatalog {
             "Acquisto annullato. L'audio continua; puoi usare lo spegnimento plebeo.",
         ),
         AppLanguage.FRENCH to prankCatalog(
-            "Préparez vos oreilles",
+            "Ça arrive...",
             "À zéro, l'audio sera lu au volume maximal.",
             "Relancer le compte à rebours",
             "Extinction Premium en cours",
@@ -1002,7 +1002,7 @@ object GemidosTextCatalog {
             "Achat annulé. L'audio continue ; utilisez l'extinction plébéienne.",
         ),
         AppLanguage.GERMAN to prankCatalog(
-            "Mach deine Ohren bereit",
+            "Gleich geht's los...",
             "Bei null wird der Ton mit maximaler Lautstärke abgespielt.",
             "Countdown neu starten",
             "Premium-Ausschalten läuft",
@@ -1021,7 +1021,7 @@ object GemidosTextCatalog {
             "Kauf abgebrochen. Der Ton läuft weiter; nutze das Plebejer-Ausschalten.",
         ),
         AppLanguage.DUTCH to prankCatalog(
-            "Maak je oren klaar",
+            "Daar komt het...",
             "Bij nul speelt de audio op maximaal volume.",
             "Aftellen opnieuw starten",
             "Premium uitschakeling bezig",
@@ -1040,7 +1040,7 @@ object GemidosTextCatalog {
             "Aankoop geannuleerd. De audio speelt nog; gebruik de plebejische uitschakeling.",
         ),
         AppLanguage.CHINESE_SIMPLIFIED to prankCatalog(
-            "准备好你的耳朵",
+            "要来了…",
             "倒计时归零后，音频会以最大音量播放。",
             "重新开始倒计时",
             "正在进行 Premium 关闭",
@@ -1059,7 +1059,7 @@ object GemidosTextCatalog {
             "购买已取消。音频仍在播放；你可以使用平民关闭。",
         ),
         AppLanguage.CHINESE_TRADITIONAL to prankCatalog(
-            "準備好你的耳朵",
+            "要來了…",
             "倒數歸零後，音訊會以最大音量播放。",
             "重新開始倒數",
             "正在進行 Premium 關閉",
@@ -1078,7 +1078,7 @@ object GemidosTextCatalog {
             "購買已取消。音訊仍在播放；你可以使用平民關閉。",
         ),
         AppLanguage.PORTUGUESE_BRAZIL to prankCatalog(
-            "Prepare os ouvidos",
+            "Lá vem...",
             "Quando chegar a zero, o áudio tocará no volume máximo.",
             "Reiniciar contagem regressiva",
             "Desligamento Premium em andamento",
@@ -1097,7 +1097,7 @@ object GemidosTextCatalog {
             "Compra cancelada. O áudio continua; use o desligamento plebeu.",
         ),
         AppLanguage.PORTUGUESE_PORTUGAL to prankCatalog(
-            "Prepara os ouvidos",
+            "Aí vem...",
             "Quando chegar a zero, o áudio tocará no volume máximo.",
             "Reiniciar contagem decrescente",
             "Desligamento Premium em curso",
@@ -1116,7 +1116,7 @@ object GemidosTextCatalog {
             "Compra cancelada. O áudio continua; usa o desligamento plebeu.",
         ),
         AppLanguage.CATALAN to prankCatalog(
-            "Prepara les orelles",
+            "Ja ve...",
             "Quan arribi a zero, l'àudio sonarà al volum màxim.",
             "Reinicia el compte enrere",
             "Apagada Premium en curs",
@@ -1135,7 +1135,7 @@ object GemidosTextCatalog {
             "Compra cancel·lada. L'àudio continua; pots usar l'apagada plebea.",
         ),
         AppLanguage.BASQUE to prankCatalog(
-            "Prestatu belarriak",
+            "Badator...",
             "Kontaketa zerora iristean, audioa bolumen handienean joko da.",
             "Berrabiarazi atzerako kontaketa",
             "Premium itzaltzea martxan",
@@ -1154,7 +1154,7 @@ object GemidosTextCatalog {
             "Erosketa bertan behera utzi da. Audioak jarraitzen du; erabili plebeioen itzaltzea.",
         ),
         AppLanguage.GUARANI to prankCatalog(
-            "Embosako'i nde apysa",
+            "Oúma...",
             "Oguahẽvo cero-pe, pu oñehendúta ijyvatevépe.",
             "Ñepyrũ jey papapy guejy",
             "Premium ñembogue oñemotenonde",
@@ -1173,7 +1173,7 @@ object GemidosTextCatalog {
             "Joguapy ojejoko. Pu osegi; ikatu reiporu ñembogue tetãygua.",
         ),
         AppLanguage.QUECHUA to prankCatalog(
-            "Rinriykikunata wakichiy",
+            "Hamuqmi...",
             "Yupay cero-man chayaptin, uyarina aswan sinchiwan waqanqa.",
             "Yupay urayta musuqmanta qallariy",
             "Premium wañuchiy purichkan",
@@ -1192,7 +1192,7 @@ object GemidosTextCatalog {
             "Rantiy sayachisqa. Uyarina purichkan; llaqta runapa wañuchiyninta ruray.",
         ),
         AppLanguage.CANTONESE to prankCatalog(
-            "準備好對耳",
+            "嚟喇…",
             "倒數到零之後，音訊會用最大音量播放。",
             "重新開始倒數",
             "Premium 熄聲進行中",
@@ -1211,7 +1211,7 @@ object GemidosTextCatalog {
             "購買已取消。音訊仲播緊；你可以用平民熄聲。",
         ),
         AppLanguage.KOREAN to prankCatalog(
-            "귀를 준비하세요",
+            "곧 시작됩니다...",
             "카운트가 0이 되면 최대 볼륨으로 오디오가 재생됩니다.",
             "카운트다운 다시 시작",
             "Premium 끄기 진행 중",

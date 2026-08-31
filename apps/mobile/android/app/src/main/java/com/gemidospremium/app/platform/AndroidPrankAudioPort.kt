@@ -66,6 +66,7 @@ class AndroidPrankAudioPort(
                 setAudioAttributes(attributes)
                 setDataSource(descriptor.fileDescriptor, descriptor.startOffset, descriptor.length)
                 descriptor.close()
+                isLooping = true
                 setOnCompletionListener {
                     val callback = completionCallback
                     stopAndRestore()

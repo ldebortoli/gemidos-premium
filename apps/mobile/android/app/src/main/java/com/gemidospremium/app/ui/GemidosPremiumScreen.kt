@@ -10,6 +10,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,7 +34,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -108,7 +108,7 @@ fun GemidosPremiumScreen(
             try {
                 celebrationVisible = true
                 celebration.snapTo(0f)
-                celebration.animateTo(1f, tween(1_800, easing = LinearEasing))
+                celebration.animateTo(1f, tween(3_200, easing = LinearEasing))
             } finally {
                 celebrationVisible = false
             }
@@ -178,7 +178,7 @@ fun GemidosPremiumScreen(
         }
 
         if (celebrationVisible) {
-            PremiumConfetti(
+            PremiumDopamineOverlay(
                 progress = celebration.value,
                 contentDescription = text[TextKey.FIREWORKS_A11Y],
                 modifier = Modifier.matchParentSize(),
@@ -341,12 +341,6 @@ private fun AudioHero(state: GemidosState, text: GemidosText) {
                         fontWeight = FontWeight.Black,
                         lineHeight = 82.sp,
                     )
-                    Text(
-                        text = text[TextKey.MAX_INTENSITY_HELP],
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center,
-                        fontSize = 13.sp,
-                    )
                 }
 
                 PrankPhase.PLAYING -> {
@@ -433,19 +427,18 @@ private fun PlayingActions(
         state.error
             ?.takeIf { state.errorTarget == ErrorTarget.NORMAL }
             ?.let { ActionError(it) }
-        OutlinedButton(
-            onClick = onNormalOff,
+        Text(
+            text = text[TextKey.NORMAL_PLEBEIAN_OFF],
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 54.dp),
-            shape = RoundedCornerShape(18.dp),
-        ) {
-            Text(
-                text = text[TextKey.NORMAL_PLEBEIAN_OFF],
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-            )
-        }
+                .heightIn(min = 48.dp)
+                .clickable(onClick = onNormalOff)
+                .padding(vertical = 14.dp),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Medium,
+            textAlign = TextAlign.Center,
+        )
     }
 }
 
@@ -556,22 +549,132 @@ private fun AudioGlyph(isPlaying: Boolean, contentDescription: String, modifier:
 }
 
 @Composable
-private fun PremiumConfetti(progress: Float, contentDescription: String, modifier: Modifier = Modifier) {
-    Canvas(modifier.semantics { this.contentDescription = contentDescription }) {
-        val colors = listOf(PremiumGold, MutedRose, Color(0xFF8B9C91), Color(0xFFC7A887))
-        repeat(24) { index ->
-            val angle = index * (2.0 * PI / 24.0)
-            val distance = size.minDimension * (0.14f + progress * (0.30f + (index % 4) * 0.035f))
-            val center = Offset(size.width / 2f, size.height * 0.42f)
-            val point = Offset(
-                center.x + cos(angle).toFloat() * distance,
-                center.y + sin(angle).toFloat() * distance + progress * progress * size.height * 0.12f,
+private fun PremiumDopamineOverlay(
+    progress: Float,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+) {
+    val colors = listOf(
+        PremiumGold,
+        Color(0xFFFF6B8A),
+        Color(0xFF63D9FF),
+        Color(0xFF91F29B),
+        Color(0xFFC68CFF),
+    )
+    val reelSymbols = listOf("7", "★", "◆", "♥")
+    val reelStep = (progress * 28).toInt()
+
+    Box(
+        modifier = modifier.semantics { this.contentDescription = contentDescription },
+        contentAlignment = Alignment.Center,
+    ) {
+        Canvas(Modifier.matchParentSize()) {
+            val flash = ((sin(progress * PI * 8).toFloat() + 1f) / 2f).coerceIn(0f, 1f)
+            drawRect(
+                color = colors[reelStep % colors.size],
+                alpha = 0.06f + flash * 0.13f,
             )
-            drawCircle(
-                color = colors[index % colors.size].copy(alpha = (1f - progress).coerceAtLeast(0f)),
-                radius = (3.5f + index % 3) * density,
-                center = point,
+
+            repeat(64) { index ->
+                val side = index / 16
+                val position = (index % 16) / 15f
+                val point = when (side) {
+                    0 -> Offset(position * size.width, 12.dp.toPx())
+                    1 -> Offset(size.width - 12.dp.toPx(), position * size.height)
+                    2 -> Offset((1f - position) * size.width, size.height - 12.dp.toPx())
+                    else -> Offset(12.dp.toPx(), (1f - position) * size.height)
+                }
+                val lit = (index + reelStep) % 4 == 0
+                drawCircle(
+                    color = colors[index % colors.size].copy(alpha = if (lit) 0.95f else 0.20f),
+                    radius = (if (lit) 5f else 3f) * density,
+                    center = point,
+                )
+            }
+
+            repeat(120) { index ->
+                val x = ((index * 37) % 101) / 100f * size.width
+                val initialY = ((index * 53) % 103) / 103f
+                val y = ((initialY + progress * (1.7f + index % 4 * 0.12f)) % 1.12f) * size.height
+                drawCircle(
+                    color = colors[index % colors.size].copy(alpha = 0.82f),
+                    radius = (2.4f + index % 4) * density,
+                    center = Offset(x, y),
+                )
+            }
+
+            val burstCenters = listOf(
+                Offset(size.width * 0.18f, size.height * 0.24f),
+                Offset(size.width * 0.78f, size.height * 0.22f),
+                Offset(size.width * 0.23f, size.height * 0.70f),
+                Offset(size.width * 0.82f, size.height * 0.68f),
+                Offset(size.width * 0.50f, size.height * 0.13f),
             )
+            burstCenters.forEachIndexed { burstIndex, center ->
+                val burstProgress = (progress * 2.2f + burstIndex * 0.19f) % 1f
+                repeat(22) { ray ->
+                    val angle = ray * (2.0 * PI / 22.0) + burstIndex * 0.31
+                    val distance = size.minDimension * (0.035f + burstProgress * 0.24f)
+                    val direction = Offset(cos(angle).toFloat(), sin(angle).toFloat())
+                    val end = center + direction * distance
+                    drawLine(
+                        color = colors[(ray + burstIndex) % colors.size].copy(alpha = 1f - burstProgress),
+                        start = center + direction * distance * 0.45f,
+                        end = end,
+                        strokeWidth = (1.2f + ray % 3) * density,
+                        cap = StrokeCap.Round,
+                    )
+                    drawCircle(
+                        color = colors[(ray + burstIndex) % colors.size].copy(alpha = 1f - burstProgress),
+                        radius = (2f + ray % 2) * density,
+                        center = end,
+                    )
+                }
+            }
+        }
+
+        Surface(
+            color = Color(0xED160F19),
+            shape = RoundedCornerShape(28.dp),
+            tonalElevation = 12.dp,
+        ) {
+            Column(
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = "★ PREMIUM ×777 ★",
+                    color = PremiumGold,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Black,
+                )
+                Spacer(Modifier.height(12.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(9.dp)) {
+                    repeat(3) { reel ->
+                        Surface(
+                            modifier = Modifier.size(width = 64.dp, height = 78.dp),
+                            color = Color(0xFF2A2029),
+                            shape = RoundedCornerShape(14.dp),
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Text(
+                                    text = reelSymbols[(reelStep + reel * 2) % reelSymbols.size],
+                                    color = colors[(reelStep + reel) % colors.size],
+                                    fontSize = 38.sp,
+                                    fontWeight = FontWeight.Black,
+                                )
+                            }
+                        }
+                    }
+                }
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = "★★★★★",
+                    color = colors[reelStep % colors.size],
+                    letterSpacing = 5.sp,
+                    fontWeight = FontWeight.Black,
+                )
+            }
         }
     }
 }

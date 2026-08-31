@@ -54,6 +54,26 @@ if (errors.length === 0) {
   if (!screen.includes("height(112.dp)") || !screen.includes("TextKey.PREMIUM_OFF")) {
     errors.push("Apagado Premium debe ser el boton principal extragrande");
   }
+  if (screen.includes("TextKey.MAX_INTENSITY_HELP")) {
+    errors.push("El contador no debe mostrar una explicacion debajo del numero");
+  }
+  if (
+    screen.includes("OutlinedButton(") ||
+    !screen.includes("text = text[TextKey.NORMAL_PLEBEIAN_OFF]") ||
+    !screen.includes("fontSize = 12.sp") ||
+    !screen.includes(".clickable(onClick = onNormalOff)")
+  ) {
+    errors.push("Apagado plebeyo debe ser texto pequeno tocable, sin superficie de boton");
+  }
+  if (
+    !screen.includes("PremiumDopamineOverlay(") ||
+    !screen.includes("repeat(120)") ||
+    !screen.includes("burstCenters") ||
+    !screen.includes("★ PREMIUM ×777 ★") ||
+    !screen.includes("tween(3_200")
+  ) {
+    errors.push("El apagado Premium debe incluir luces, tragamonedas y fuegos artificiales abundantes");
+  }
   if (!mainActivity.includes("override fun onPause") || !mainActivity.includes("engine.pause()")) {
     errors.push("Salir de la actividad debe cortar el audio y restaurar el telefono");
   }
@@ -61,9 +81,10 @@ if (errors.length === 0) {
     !audioPort.includes("getStreamVolume") ||
     !audioPort.includes("getStreamMaxVolume") ||
     !audioPort.includes("setStreamVolume") ||
-    !audioPort.includes("abandonAudioFocus")
+    !audioPort.includes("abandonAudioFocus") ||
+    !audioPort.includes("isLooping = true")
   ) {
-    errors.push("El puerto Android debe maximizar temporalmente y restaurar el volumen y foco multimedia");
+    errors.push("El puerto Android debe reproducir en loop, maximizar temporalmente y restaurar volumen y foco");
   }
   if (appConfig.app.name !== "Gemidos PREMIUM" || appConfig.app.android.package !== "com.gemidospremium.app") {
     errors.push("La identidad visible y el paquete deben pertenecer a Gemidos PREMIUM");
@@ -110,9 +131,9 @@ if (errors.length === 0) {
   const audioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/prank_moans.mp3");
   const audio = fs.readFileSync(audioPath);
   const audioHash = crypto.createHash("sha256").update(audio).digest("hex").toUpperCase();
-  if (audio.length !== 765600) errors.push("El recurso de audio no coincide con el archivo verificado");
-  if (audioHash !== "F12F8367AD8D20A9240E55720A02B9AD2C9216D83609C7322E28792305E4A176") {
-    errors.push("El hash del audio integrado no coincide con la fuente documentada");
+  if (audio.length !== 139141) errors.push("El recurso de audio no coincide con la edicion verificada");
+  if (audioHash !== "D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E") {
+    errors.push("El hash del audio integrado no coincide con la edicion documentada");
   }
 }
 

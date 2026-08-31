@@ -57,3 +57,24 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-29.
 - Decision: conservar Android 16 / API 36 como `compileSdk` y `targetSdk`, fijar ese SDK en CI y deshabilitar unicamente `OldTargetApi`; el resto de Android Lint continua con `warningsAsErrors` y `abortOnError`.
 - Motivo: API 36 cumple el requisito vigente de Google Play y Android 17 / API 37 sigue documentado como opt-in Preview; el runner conoce API 37 y elevaba esa unica advertencia ambiental a error, aunque el SDK 37 no esta disponible como plataforma estable en los repositorios locales.
+
+## D-009 - Audio suministrado, transformado y en loop
+
+- Estado: vigente; reemplaza la seleccion de audio de D-004 y la reproduccion unica de D-005.
+- Fecha: 2026-08-31.
+- Decision: integrar solo una version transformada del MP3 suministrado por el usuario: recorte de silencios, tono +3,5 %, tempo neto levemente mas rapido, filtros de paso/EQ, atenuacion y limitador; eliminar metadatos heredados y reproducirla en loop hasta un apagado o evento de ciclo de vida.
+- Motivo: usar el audio exacto pedido con una identidad sonora perceptiblemente editada y un loop controlable, sin presentar la transformacion como prueba de licencia ni renunciar a la restauracion segura de volumen/foco.
+
+## D-010 - Contraste plebeyo/Premium y reinicio automatico
+
+- Estado: vigente.
+- Fecha: 2026-08-31.
+- Decision: mostrar `Se viene...` como unico texto del contador; representar Apagado plebeyo como una accion textual pequena que corta y reinicia inmediatamente en 10 sin mensajes; reservar el estado silenciado visible para Premium y ampliar su celebracion a 3,2 segundos con tragamonedas, luces alternadas, lluvia de particulas y multiples fuegos artificiales.
+- Motivo: reforzar el contraste comico pedido, quitar pasos y mensajes innecesarios del flujo gratuito y concentrar el exceso visual en la experiencia Premium.
+
+## D-011 - Finales de linea deterministas
+
+- Estado: vigente.
+- Fecha: 2026-08-31.
+- Decision: normalizar a LF todo texto versionado mediante `.gitattributes`, conservar CRLF para archivos batch y declarar los recursos binarios de forma explicita.
+- Motivo: reproducir de manera estable los controles de formato entre Windows y los runners Linux sin reescrituras masivas ni aceptar finales de linea mixtos.

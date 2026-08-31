@@ -84,9 +84,10 @@ class GemidosEngine(
 
     fun turnOffNormally(): EngineResult {
         state = state.copy(
-            phase = PrankPhase.SILENCED,
+            countdown = 10,
+            phase = PrankPhase.COUNTDOWN,
             showPurchaseDialog = false,
-            notice = text()[TextKey.NORMAL_OFF_NOTICE],
+            notice = null,
             error = null,
             errorTarget = null,
             dismissedCelebrationSequence = state.celebrationSequence,

@@ -61,12 +61,13 @@ class GemidosEngineTest {
     }
 
     @Test
-    fun `plebeian shutdown is immediate and free`() {
+    fun `plebeian shutdown is immediate free and restarts without copy`() {
         val result = playingEngine().turnOffNormally()
 
-        assertEquals(PrankPhase.SILENCED, result.state.phase)
+        assertEquals(PrankPhase.COUNTDOWN, result.state.phase)
+        assertEquals(10, result.state.countdown)
         assertEquals(GemidosEffect.StopAudio, result.effect)
-        assertTrue(result.state.notice!!.contains("plebeyo"))
+        assertNull(result.state.notice)
         assertNull(result.state.error)
     }
 

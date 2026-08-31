@@ -1,20 +1,30 @@
-# Audio integrado
+# Audio integrado y procedencia
 
-## Recurso
+## Recurso actual
 
-- Título: `LollipopMoans`
-- Artista original: `jshine7 (Freesound)`
-- Distribuidor consultado: Pixabay
-- Página: <https://pixabay.com/sound-effects/people-lollipopmoans-68546/>
-- Licencia indicada por la página: Pixabay Content License
-- Resumen de licencia: <https://pixabay.com/service/license-summary/>
-- Archivo en la app: `apps/mobile/android/app/src/main/res/raw/prank_moans.mp3`
-- Formato: MP3
-- Duración verificada: 38,280 segundos
-- Tamaño verificado: 765.600 bytes
-- SHA-256: `F12F8367AD8D20A9240E55720A02B9AD2C9216D83609C7322E28792305E4A176`
-- Fecha de incorporación y verificación: 2026-08-29
+- Archivo fuente local suministrado por el usuario: `Voicy_gemi 2 audio troll.mp3`.
+- Fecha de recepción y transformación: 2026-08-31.
+- Archivo integrado: `apps/mobile/android/app/src/main/res/raw/prank_moans.mp3`.
+- Formato: MP3, 44,1 kHz, mono, 112 kb/s.
+- Duración verificada: 9,863 segundos.
+- Tamaño verificado: 139.141 bytes.
+- SHA-256: `D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E`.
 
-La licencia permite usar, adaptar e incorporar el contenido gratuitamente, sujeta a sus usos prohibidos. Este proyecto lo integra como parte de una aplicación con lógica, interfaz y experiencia propias; no lo ofrece ni lo vende como archivo de audio independiente.
+## Transformación aplicada
 
-La atribución no es obligatoria según el resumen de licencia consultado, pero se conserva aquí por trazabilidad y reconocimiento del autor. Si la aplicación se publica, conviene volver a verificar la página y los términos vigentes en la fecha de lanzamiento.
+La aplicación no incorpora el archivo recibido sin cambios. La edición integrada:
+
+- recorta el silencio inicial y final sobrante;
+- eleva el tono aproximadamente 3,5 %;
+- modifica levemente el tempo neto;
+- aplica filtros pasa-altos y pasa-bajos, ecualización y atenuación;
+- limita picos para evitar clipping adicional;
+- elimina metadatos heredados y agrega metadatos internos de trazabilidad.
+
+El resultado se reproduce en loop mientras la pantalla permanece activa y hasta que el usuario emplea un apagado o Android interrumpe el foco/ciclo de vida.
+
+## Derechos y distribución
+
+No se recibió documentación de autoría o licencia junto con el archivo fuente. Las transformaciones técnicas anteriores no eliminan automáticamente derechos de autor ni constituyen una autorización de distribución. Antes de publicar la app fuera de pruebas privadas, el propietario del proyecto debe confirmar que posee una licencia o permiso suficiente para usar y redistribuir este audio.
+
+El MP3 fuente de Descargas no se copia al repositorio; solo se versiona la edición integrada. El recurso anterior de Pixabay fue reemplazado y ya no forma parte del binario actual.
