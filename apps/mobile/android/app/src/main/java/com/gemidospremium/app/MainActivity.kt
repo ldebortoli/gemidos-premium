@@ -24,6 +24,7 @@ import com.gemidospremium.app.model.AudioResult
 import com.gemidospremium.app.model.EngineResult
 import com.gemidospremium.app.model.GemidosEffect
 import com.gemidospremium.app.model.GemidosState
+import com.gemidospremium.app.platform.AndroidPremiumCelebrationAudio
 import com.gemidospremium.app.platform.AndroidPrankAudioPort
 import com.gemidospremium.app.platform.PreferencesPremiumStore
 import com.gemidospremium.app.ports.PrankAudioPort
@@ -36,6 +37,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity(), BillingEvents {
     private lateinit var engine: GemidosEngine
     private lateinit var audioPort: PrankAudioPort
+    private lateinit var premiumCelebrationAudio: AndroidPremiumCelebrationAudio
     private lateinit var premiumSilenceRunner: PremiumSilenceRunner
     private lateinit var languageStore: PreferencesLanguageStore
     private var billingGateway: BillingGateway? = null
@@ -55,6 +57,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
         languageStore = PreferencesLanguageStore(this)
         selectedLanguage = languageStore.current()
         audioPort = AndroidPrankAudioPort(this) { currentText }
+        premiumCelebrationAudio = AndroidPremiumCelebrationAudio(this)
         premiumSilenceRunner = PremiumSilenceRunner(audioPort, pause = { delay(it) })
         engine = GemidosEngine(
             premiumStore = PreferencesPremiumStore(this),
@@ -81,9 +84,12 @@ class MainActivity : ComponentActivity(), BillingEvents {
                     adUnitId = BuildConfig.ADMOB_BANNER_ID,
                     isDemo = BuildConfig.DEMO_BILLING,
                     onCountdownTick = { applyResult(engine.tickCountdown()) },
-                    onRestart = { uiState = engine.restartCountdown() },
+                    onRestart = ::restartCountdown,
                     onPremium = { applyResult(engine.pressPremium()) },
-                    onNormalOff = { applyResult(engine.turnOffNormally()) },
+                    onNormalOff = {
+                        premiumCelebrationAudio.stop()
+                        applyResult(engine.turnOffNormally())
+                    },
                     onConfirmPurchase = { applyResult(engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING)) },
                     onDismissPurchase = { uiState = engine.dismissPurchase() },
                     onResetDemoPremium = ::resetDemoPremium,
@@ -107,6 +113,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
     override fun onPause() {
         if (::engine.isInitialized) {
             premiumSilenceJob?.cancel()
+            premiumCelebrationAudio.stop()
             applyResult(engine.pause())
             shouldRestartOnResume = true
         }
@@ -115,6 +122,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     override fun onDestroy() {
         premiumSilenceJob?.cancel()
+        if (::premiumCelebrationAudio.isInitialized) premiumCelebrationAudio.stop()
         if (::audioPort.isInitialized) audioPort.stopAndRestore()
         billingGateway?.close()
         super.onDestroy()
@@ -138,6 +146,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
     private fun resetDemoPremium() {
         if (!BuildConfig.DEMO_BILLING) return
         premiumSilenceJob?.cancel()
+        premiumCelebrationAudio.stop()
         adsReady = false
         applyResult(engine.resetPremiumForTesting())
         initializeAdsIfEligible()
@@ -179,12 +188,18 @@ class MainActivity : ComponentActivity(), BillingEvents {
 
     private fun runPremiumSilence() {
         premiumSilenceJob?.cancel()
+        premiumCelebrationAudio.play()
         premiumSilenceJob = lifecycleScope.launch {
             uiState = when (val result = premiumSilenceRunner.run()) {
                 AudioResult.Success -> engine.premiumSilenceCompleted()
                 is AudioResult.Failure -> engine.premiumSilenceFailed(result.message)
             }
         }
+    }
+
+    private fun restartCountdown() {
+        premiumCelebrationAudio.stop()
+        uiState = engine.restartCountdown()
     }
 
     private fun selectLanguage(language: AppLanguage) {

@@ -10,6 +10,7 @@ No hay tareas en curso.
 
 # DONE
 
+- [2026-08-31] Crear e integrar una pista Ogg Vorbis original de 15 segundos con clics de tragamonedas, monedas/campanillas y cinco fanfarrias de premio; sincronizarla con Premium, detenerla al salir/reiniciar/restablecer, documentar hash/procedencia y verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-31] Extender Apagado Premium: conservar el silencio/restaurado a los 1,5 segundos, mantener 15 segundos de animacion, mostrar felicitacion en las 21 opciones de idioma y sumar cuatro tragamonedas distribuidas ademas de la central; verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-31] Integrar una edicion transformada del MP3 suministrado y reproducirla en loop; dejar `Se viene...` como unico texto del contador; convertir Apagado plebeyo en texto pequeno con reinicio automatico; ampliar Premium con tragamonedas, luces, 120 particulas y cinco fuegos artificiales; normalizar finales de linea; verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-29] Corregir el CI inicial: conservar API 36 estable, aislar solo `OldTargetApi` frente al SDK 37 Preview conocido por el runner, mantener todos los demas avisos como errores y revalidar contratos, 18 pruebas, cobertura 100% y lint local.

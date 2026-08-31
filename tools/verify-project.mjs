@@ -11,9 +11,11 @@ const requiredFiles = [
   "apps/mobile/android/app/src/main/AndroidManifest.xml",
   "apps/mobile/android/app/src/main/res/values/strings.xml",
   "apps/mobile/android/app/src/main/res/raw/prank_moans.mp3",
+  "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/domain/GemidosEngine.kt",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/domain/PremiumSilenceRunner.kt",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPrankAudioPort.kt",
+  "apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPremiumCelebrationAudio.kt",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/ui/GemidosPremiumScreen.kt",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt",
   "apps/mobile/android/app/src/demo/AndroidManifest.xml",
@@ -33,6 +35,7 @@ if (errors.length === 0) {
   const engine = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/domain/GemidosEngine.kt");
   const mainActivity = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/MainActivity.kt");
   const audioPort = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPrankAudioPort.kt");
+  const premiumAudio = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPremiumCelebrationAudio.kt");
   const screen = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/ui/GemidosPremiumScreen.kt");
   const localization = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt");
   const manifest = read("apps/mobile/android/app/src/main/AndroidManifest.xml");
@@ -88,6 +91,14 @@ if (errors.length === 0) {
   ) {
     errors.push("El puerto Android debe reproducir en loop, maximizar temporalmente y restaurar volumen y foco");
   }
+  if (
+    !premiumAudio.includes("R.raw.premium_slot_celebration") ||
+    !premiumAudio.includes("isLooping = false") ||
+    !mainActivity.includes("premiumCelebrationAudio.play()") ||
+    (mainActivity.match(/premiumCelebrationAudio\.stop\(\)/g) || []).length < 4
+  ) {
+    errors.push("La celebracion Premium debe reproducir una vez sus sonidos y detenerlos con el ciclo de vida");
+  }
   if (appConfig.app.name !== "Gemidos PREMIUM" || appConfig.app.android.package !== "com.gemidospremium.app") {
     errors.push("La identidad visible y el paquete deben pertenecer a Gemidos PREMIUM");
   }
@@ -136,6 +147,13 @@ if (errors.length === 0) {
   if (audio.length !== 139141) errors.push("El recurso de audio no coincide con la edicion verificada");
   if (audioHash !== "D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E") {
     errors.push("El hash del audio integrado no coincide con la edicion documentada");
+  }
+  const premiumAudioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg");
+  const premiumAudioAsset = fs.readFileSync(premiumAudioPath);
+  const premiumAudioHash = crypto.createHash("sha256").update(premiumAudioAsset).digest("hex").toUpperCase();
+  if (premiumAudioAsset.length !== 96796) errors.push("La pista Premium no coincide con el recurso verificado");
+  if (premiumAudioHash !== "F75147862BFD24C6B60CFF0A1E0142431E7A994765CC9E862B5F712F08039DF1") {
+    errors.push("El hash de los sonidos Premium no coincide con el recurso original documentado");
   }
 }
 

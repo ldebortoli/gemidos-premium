@@ -30,6 +30,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - El APK se generara desde Apps Dashboard o solo por pedido explicito; la implementacion ordinaria no inicia Gradle para ensamblar un artefacto.
 - El audio integrado es una edicion de 9,863 segundos del MP3 suministrado por el usuario, reproducida en loop; su SHA-256 es `D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E`.
 - El contador muestra solo `Se viene...` sobre el numero. Apagado plebeyo es texto pequeno y reinicia directamente en 10; Premium silencia y restaura el audio tras su fade de 1,5 segundos, mientras una celebracion independiente de 15 segundos muestra felicitacion localizada, cinco tragamonedas, luces, particulas y cinco fuegos artificiales.
+- La celebracion Premium reproduce una pista Ogg Vorbis original de 15 segundos (clics de carrete, monedas/campanillas y cinco fanfarrias de premio), sin muestras externas; se detiene al salir, reiniciar o restablecer Premium.
 - GitHub Secret Scanning y Push Protection no estan disponibles para este repositorio privado personal; se conserva el escaneo local y el bloqueo exacto en BACKLOG.
 
 ## Convenciones
@@ -40,4 +41,5 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - Si el proyecto tiene una UI para controlar un bot, servidor o proceso en segundo plano, cerrar esa UI debe detener el proceso administrado cuando sea tecnicamente posible.
 - El apagado plebeyo debe permanecer visible, gratuito e inmediato mientras suena el audio.
 - La app restaura el volumen multimedia previo y libera el foco de audio al apagar, perder foco, salir o cerrarse.
+- Los sonidos suplementarios de la celebracion nunca deben impedir ni retrasar el restaurado del audio principal.
 - Los archivos de texto versionados se normalizan a LF mediante `.gitattributes`; scripts batch conservan CRLF y los recursos binarios se marcan explicitamente.

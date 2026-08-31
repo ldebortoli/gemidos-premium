@@ -28,3 +28,14 @@ El resultado se reproduce en loop mientras la pantalla permanece activa y hasta 
 No se recibió documentación de autoría o licencia junto con el archivo fuente. Las transformaciones técnicas anteriores no eliminan automáticamente derechos de autor ni constituyen una autorización de distribución. Antes de publicar la app fuera de pruebas privadas, el propietario del proyecto debe confirmar que posee una licencia o permiso suficiente para usar y redistribuir este audio.
 
 El MP3 fuente de Descargas no se copia al repositorio; solo se versiona la edición integrada. El recurso anterior de Pixabay fue reemplazado y ya no forma parte del binario actual.
+
+## Efectos originales de tragamonedas y premios
+
+- Archivo integrado: `apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg`.
+- Formato: Ogg Vorbis, 44,1 kHz, mono.
+- Duración verificada: 15,000 segundos.
+- Tamaño verificado: 96.796 bytes.
+- SHA-256: `F75147862BFD24C6B60CFF0A1E0142431E7A994765CC9E862B5F712F08039DF1`.
+- Fecha de creación y verificación: 2026-08-31.
+
+Esta pista fue sintetizada específicamente para el proyecto, sin grabaciones ni muestras de terceros. Combina clics mecánicos de carrete, campanillas/monedas periódicas y cinco fanfarrias armónicas de premio. No se reproduce en loop: acompaña una sola vez los 15 segundos de la celebración Premium y se interrumpe si la app sale de primer plano o el usuario reinicia la experiencia.

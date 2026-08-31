@@ -9,7 +9,7 @@ Gemidos PREMIUM es una broma privada y controlable: crea diez segundos de expect
 1. La app abre en `COUNTDOWN` mostrando 10 y reduce un número por segundo.
 2. Al llegar a 0 pasa a `PLAYING`, solicita foco multimedia, guarda el volumen anterior, pide el máximo permitido y reproduce el MP3 integrado en loop.
 3. `Apagado plebeyo` detiene el reproductor, restaura volumen/foco y vuelve directamente a `COUNTDOWN` en 10, sin aviso, pantalla de apagado ni botón de reinicio.
-4. `APAGADO PREMIUM` abre confirmación si no hay licencia; en demo la simula sin cobro. Con Premium activo ejecuta un fade de 1,5 segundos, corta y restaura el audio, y mantiene durante 15 segundos una celebración superpuesta con una felicitación localizada, cinco tragamonedas distribuidas, luces perimetrales, lluvia de partículas y cinco ráfagas de fuegos artificiales.
+4. `APAGADO PREMIUM` abre confirmación si no hay licencia; en demo la simula sin cobro. Con Premium activo ejecuta un fade de 1,5 segundos, corta y restaura el audio, y mantiene durante 15 segundos una celebración superpuesta con una felicitación localizada, cinco tragamonedas distribuidas, luces perimetrales, lluvia de partículas, cinco ráfagas de fuegos artificiales y una pista original de carretes, monedas y premios.
 5. El clip se repite hasta apagarlo; al perder foco, cambiar de app o cerrar la actividad, la reproducción termina y el volumen se restaura.
 6. Desde la pantalla silenciada se puede reiniciar el contador.
 
@@ -17,7 +17,7 @@ Gemidos PREMIUM es una broma privada y controlable: crea diez segundos de expect
 
 - `COUNTDOWN`: 10 a 0, sin audio.
 - `PLAYING`: audio activo y ambos apagados visibles.
-- `PREMIUM_SILENCING`: fade de 1,5 segundos; el restaurado final vive en un `finally`. La celebración visual es independiente y continúa hasta completar sus 15 segundos aunque el estado ya sea `SILENCED`.
+- `PREMIUM_SILENCING`: fade de 1,5 segundos; el restaurado final vive en un `finally`. La celebración audiovisual es independiente y continúa hasta completar sus 15 segundos aunque el estado ya sea `SILENCED`; al salir, reiniciar o restablecer Premium, sus sonidos se detienen y liberan inmediatamente.
 - `SILENCED`: reservado para el desenlace Premium, audio detenido y reinicio disponible.
 - `ERROR`: mensaje recuperable inmediatamente encima de la acción de reinicio.
 - Compra: confirmación, cancelación, pendiente, error y restauración mediante Google Play.

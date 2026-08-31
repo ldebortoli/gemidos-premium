@@ -85,3 +85,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: conservar el fade y restaurado del audio en 1,5 segundos, pero mantener la celebracion visual superpuesta durante 15 segundos; mostrar una felicitacion localizada y cinco maquinas tragamonedas en total, con cuatro minis distribuidas por la pantalla.
 - Motivo: prolongar el remate visual sin prolongar el ruido ni retrasar la recuperacion del volumen y foco multimedia del dispositivo.
+
+## D-013 - Pista original para la celebracion Premium
+
+- Estado: vigente.
+- Fecha: 2026-08-31.
+- Decision: acompanar la celebracion con una pista Ogg Vorbis mono de 15 segundos sintetizada para el proyecto, compuesta por clics de carrete, monedas/campanillas y cinco fanfarrias; reproducirla una vez, a volumen relativo moderado, sin tomar muestras externas y con detencion explicita al pausar, destruir, reiniciar o restablecer Premium.
+- Motivo: agregar sonido de tragamonedas y premios sin depender de material de terceros, sin repetir decodificacion de multiples efectos cortos y sin comprometer el restaurado seguro del audio principal.

@@ -10,5 +10,6 @@
 *.keystore binary
 *.jks binary
 *.mp3 binary
+*.ogg binary
 *.png binary
 *.webp binary
