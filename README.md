@@ -2,7 +2,7 @@
 
 Aplicación Android humorística inspirada en la experiencia de Linterna PREMIUM. Al abrirla muestra una cuenta regresiva de 10 a 0 y, al llegar a cero, reproduce un clip de gemidos integrado al máximo volumen multimedia permitido por el dispositivo.
 
-La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de inmediato. **APAGADO PREMIUM** ofrece una compra única y, cuando está activo, aplica un fade ceremonial con confeti. Al detenerse, perder foco, cambiar de app o cerrar la actividad, se libera el foco de audio y se restaura el volumen multimedia anterior.
+La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de inmediato. **APAGADO PREMIUM** ofrece una compra única y, cuando está activo, aplica un fade ceremonial de 1,5 segundos que corta y restaura el audio; la celebración visual continúa durante 15 segundos. Al perder foco, cambiar de app o cerrar la actividad, también se libera el foco de audio y se restaura el volumen multimedia anterior.
 
 ## Alcance de la versión 0.1.0
 
@@ -11,7 +11,7 @@ La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de 
 - Reproducción local en loop, sin red, de un MP3 editado de 9,86 segundos.
 - Volumen multimedia temporal al máximo, foco transitorio y restauración idempotente.
 - Apagado plebeyo como texto pequeño: corta gratis y reinicia la cuenta automáticamente, sin pantalla intermedia.
-- Apagado Premium extragrande con fade, tragamonedas, luces, confeti y múltiples fuegos artificiales.
+- Apagado Premium extragrande con fade, cinco tragamonedas distribuidas, luces, confeti, múltiples fuegos artificiales y felicitación localizada durante 15 segundos.
 - Compra simulada en `demo`; Google Play Billing real preparado en `play`.
 - Banner de prueba en `demo`; AdMob/UMP preparado en `play`.
 - Selector persistente con las 21 opciones de idioma de Linterna PREMIUM.

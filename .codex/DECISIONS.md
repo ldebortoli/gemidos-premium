@@ -78,3 +78,10 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: normalizar a LF todo texto versionado mediante `.gitattributes`, conservar CRLF para archivos batch y declarar los recursos binarios de forma explicita.
 - Motivo: reproducir de manera estable los controles de formato entre Windows y los runners Linux sin reescrituras masivas ni aceptar finales de linea mixtos.
+
+## D-012 - Celebracion Premium posterior al silencio
+
+- Estado: vigente; reemplaza la duracion visual definida en D-010.
+- Fecha: 2026-08-31.
+- Decision: conservar el fade y restaurado del audio en 1,5 segundos, pero mantener la celebracion visual superpuesta durante 15 segundos; mostrar una felicitacion localizada y cinco maquinas tragamonedas en total, con cuatro minis distribuidas por la pantalla.
+- Motivo: prolongar el remate visual sin prolongar el ruido ni retrasar la recuperacion del volumen y foco multimedia del dispositivo.

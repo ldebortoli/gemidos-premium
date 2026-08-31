@@ -33,6 +33,10 @@ class GemidosLocalizationTest {
             "Se viene...",
             GemidosTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)[TextKey.READY_TO_LIGHT],
         )
+        assertEquals(
+            "Felicitaciones por tu apagado Premium.",
+            GemidosTextCatalog.forLanguage(AppLanguage.SPANISH_ARGENTINA)[TextKey.PREMIUM_OFF_NOTICE],
+        )
     }
 
     @Test

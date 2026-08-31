@@ -70,9 +70,11 @@ if (errors.length === 0) {
     !screen.includes("repeat(120)") ||
     !screen.includes("burstCenters") ||
     !screen.includes("★ PREMIUM ×777 ★") ||
-    !screen.includes("tween(3_200")
+    !screen.includes("tween(15_000") ||
+    !screen.includes("celebrationText = text[TextKey.PREMIUM_OFF_NOTICE]") ||
+    (screen.match(/MiniSlotMachine\(/g) || []).length < 5
   ) {
-    errors.push("El apagado Premium debe incluir luces, tragamonedas y fuegos artificiales abundantes");
+    errors.push("El apagado Premium debe celebrar 15 segundos con felicitacion, luces y cinco tragamonedas");
   }
   if (!mainActivity.includes("override fun onPause") || !mainActivity.includes("engine.pause()")) {
     errors.push("Salir de la actividad debe cortar el audio y restaurar el telefono");

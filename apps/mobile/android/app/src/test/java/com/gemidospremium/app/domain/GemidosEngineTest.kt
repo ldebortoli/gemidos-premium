@@ -98,7 +98,7 @@ class GemidosEngineTest {
 
         val completed = engine.premiumSilenceCompleted()
         assertEquals(PrankPhase.SILENCED, completed.phase)
-        assertTrue(completed.notice!!.contains("cinco estrellas"))
+        assertEquals("Felicitaciones por tu apagado Premium.", completed.notice)
 
         val failed = engine.premiumSilenceFailed("fallo ceremonial")
         assertEquals(PrankPhase.SILENCED, failed.phase)

@@ -19,6 +19,7 @@ class PremiumSilenceRunnerTest {
         assertEquals(AudioResult.Success, result)
         assertEquals(listOf(0.82f, 0.60f, 0.38f, 0.18f, 0.00f), audio.volumes)
         assertEquals(listOf(220L, 260L, 300L, 340L, 380L), pauses)
+        assertEquals(1_500L, pauses.sum())
         assertEquals(1, audio.stopCalls)
     }
 

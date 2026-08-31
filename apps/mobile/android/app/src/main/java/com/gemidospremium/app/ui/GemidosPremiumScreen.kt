@@ -108,7 +108,7 @@ fun GemidosPremiumScreen(
             try {
                 celebrationVisible = true
                 celebration.snapTo(0f)
-                celebration.animateTo(1f, tween(3_200, easing = LinearEasing))
+                celebration.animateTo(1f, tween(15_000, easing = LinearEasing))
             } finally {
                 celebrationVisible = false
             }
@@ -180,6 +180,7 @@ fun GemidosPremiumScreen(
         if (celebrationVisible) {
             PremiumDopamineOverlay(
                 progress = celebration.value,
+                celebrationText = text[TextKey.PREMIUM_OFF_NOTICE],
                 contentDescription = text[TextKey.FIREWORKS_A11Y],
                 modifier = Modifier.matchParentSize(),
             )
@@ -551,6 +552,7 @@ private fun AudioGlyph(isPlaying: Boolean, contentDescription: String, modifier:
 @Composable
 private fun PremiumDopamineOverlay(
     progress: Float,
+    celebrationText: String,
     contentDescription: String,
     modifier: Modifier = Modifier,
 ) {
@@ -562,14 +564,14 @@ private fun PremiumDopamineOverlay(
         Color(0xFFC68CFF),
     )
     val reelSymbols = listOf("7", "★", "◆", "♥")
-    val reelStep = (progress * 28).toInt()
+    val reelStep = (progress * 132).toInt()
 
     Box(
         modifier = modifier.semantics { this.contentDescription = contentDescription },
         contentAlignment = Alignment.Center,
     ) {
         Canvas(Modifier.matchParentSize()) {
-            val flash = ((sin(progress * PI * 8).toFloat() + 1f) / 2f).coerceIn(0f, 1f)
+            val flash = ((sin(progress * PI * 38).toFloat() + 1f) / 2f).coerceIn(0f, 1f)
             drawRect(
                 color = colors[reelStep % colors.size],
                 alpha = 0.06f + flash * 0.13f,
@@ -595,7 +597,7 @@ private fun PremiumDopamineOverlay(
             repeat(120) { index ->
                 val x = ((index * 37) % 101) / 100f * size.width
                 val initialY = ((index * 53) % 103) / 103f
-                val y = ((initialY + progress * (1.7f + index % 4 * 0.12f)) % 1.12f) * size.height
+                val y = ((initialY + progress * (8.0f + index % 4 * 0.55f)) % 1.12f) * size.height
                 drawCircle(
                     color = colors[index % colors.size].copy(alpha = 0.82f),
                     radius = (2.4f + index % 4) * density,
@@ -611,7 +613,7 @@ private fun PremiumDopamineOverlay(
                 Offset(size.width * 0.50f, size.height * 0.13f),
             )
             burstCenters.forEachIndexed { burstIndex, center ->
-                val burstProgress = (progress * 2.2f + burstIndex * 0.19f) % 1f
+                val burstProgress = (progress * 10.5f + burstIndex * 0.19f) % 1f
                 repeat(22) { ray ->
                     val angle = ray * (2.0 * PI / 22.0) + burstIndex * 0.31
                     val distance = size.minDimension * (0.035f + burstProgress * 0.24f)
@@ -632,6 +634,43 @@ private fun PremiumDopamineOverlay(
                 }
             }
         }
+
+        MiniSlotMachine(
+            reelStep = reelStep,
+            phase = 1,
+            symbols = reelSymbols,
+            colors = colors,
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(start = 18.dp, top = 96.dp),
+        )
+        MiniSlotMachine(
+            reelStep = reelStep,
+            phase = 5,
+            symbols = reelSymbols,
+            colors = colors,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(end = 18.dp, top = 164.dp),
+        )
+        MiniSlotMachine(
+            reelStep = reelStep,
+            phase = 9,
+            symbols = reelSymbols,
+            colors = colors,
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(start = 20.dp, bottom = 154.dp),
+        )
+        MiniSlotMachine(
+            reelStep = reelStep,
+            phase = 13,
+            symbols = reelSymbols,
+            colors = colors,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 18.dp, bottom = 86.dp),
+        )
 
         Surface(
             color = Color(0xED160F19),
@@ -674,7 +713,64 @@ private fun PremiumDopamineOverlay(
                     letterSpacing = 5.sp,
                     fontWeight = FontWeight.Black,
                 )
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    text = celebrationText,
+                    color = Color.White,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold,
+                    lineHeight = 21.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.widthIn(max = 280.dp),
+                )
             }
+        }
+    }
+}
+
+@Composable
+private fun MiniSlotMachine(
+    reelStep: Int,
+    phase: Int,
+    symbols: List<String>,
+    colors: List<Color>,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        modifier = modifier.size(width = 94.dp, height = 72.dp),
+        color = Color(0xE6211722),
+        shape = RoundedCornerShape(16.dp),
+        tonalElevation = 10.dp,
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 7.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Row(horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                repeat(2) { reel ->
+                    Surface(
+                        modifier = Modifier.size(width = 31.dp, height = 39.dp),
+                        color = Color(0xFF342730),
+                        shape = RoundedCornerShape(8.dp),
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text(
+                                text = symbols[(reelStep + phase + reel * 2) % symbols.size],
+                                color = colors[(reelStep + phase + reel) % colors.size],
+                                fontSize = 22.sp,
+                                fontWeight = FontWeight.Black,
+                            )
+                        }
+                    }
+                }
+            }
+            Text(
+                text = "×777",
+                color = PremiumGold,
+                fontSize = 9.sp,
+                fontWeight = FontWeight.Black,
+                letterSpacing = 1.sp,
+            )
         }
     }
 }

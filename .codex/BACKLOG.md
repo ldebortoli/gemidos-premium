@@ -10,6 +10,7 @@ No hay tareas en curso.
 
 # DONE
 
+- [2026-08-31] Extender Apagado Premium: conservar el silencio/restaurado a los 1,5 segundos, mantener 15 segundos de animacion, mostrar felicitacion en las 21 opciones de idioma y sumar cuatro tragamonedas distribuidas ademas de la central; verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-31] Integrar una edicion transformada del MP3 suministrado y reproducirla en loop; dejar `Se viene...` como unico texto del contador; convertir Apagado plebeyo en texto pequeno con reinicio automatico; ampliar Premium con tragamonedas, luces, 120 particulas y cinco fuegos artificiales; normalizar finales de linea; verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-29] Corregir el CI inicial: conservar API 36 estable, aislar solo `OldTargetApi` frente al SDK 37 Preview conocido por el runner, mantener todos los demas avisos como errores y revalidar contratos, 18 pruebas, cobertura 100% y lint local.
 - [2026-08-29] Entregar Gemidos PREMIUM 0.1.0: proyecto Android independiente, contador 10 a 0, audio licenciado al maximo con restauracion, apagados Premium/plebeyo, 21 idiomas, documentacion, repositorio privado e integracion Apps Dashboard 0.2.11; verificar 18 pruebas, cobertura 100%, lint y controles de identidad/version sin generar APK.
