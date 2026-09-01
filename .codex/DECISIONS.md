@@ -108,3 +108,12 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Motivo: incorporar la seleccion exacta del usuario sin amontonar todos los sonidos. El mismo pedido se envio a la tarea de Linterna Premium para implementacion independiente.
 - Trazabilidad: guardar fuentes/hashes/tiempos en un manifiesto, verificar sus limites con pruebas y conservar los MP3 fuente fuera de Git. Mixkit autoriza productos creativos bajo condiciones; documentar sus restricciones y revisar compatibilidad del contenido sugestivo antes de distribuir fuera de pruebas privadas.
 - Validacion: usar Node 24, ya fijado por CI, para exigir 100 % de lineas/ramas/funciones del validador; comprobar localmente con FFmpeg duracion, picos y descansos del OGG final. No agregar descargas ni FFmpeg al CI rapido.
+
+## D-016 - Icono completo dentro de las mascaras Android
+
+- Estado: vigente.
+- Fecha: 2026-09-01.
+- Decision: conservar el dibujo de boca y dos ondas, escalado uniformemente al 70 % sobre el centro 54/54 y trasladado -3/-1 dp. Reutilizar el mismo foreground en iconos adaptativos, variantes legacy y splash; quitar los dibujos de linterna que permanecian en los recursos pre-API 26.
+- Motivo: la onda exterior alcanzaba 43,57 dp desde el centro y se recortaba con la mascara circular de radio 36 dp. El dibujo corregido, incluyendo trazos y antialiasing, alcanza 27,49 dp: queda dentro del circulo seguro de radio 33 dp recomendado por Android. La correccion no requiere rasterizar ni regenerar el diseño.
+- Verificacion: render local del vector antes/despues con mascaras circular y rectangular redondeada, comprobacion de todos los pixeles del simbolo contra el circulo seguro y contrato de escala/ondas/referencias compartidas en `tools/verify-project.mjs`.
+- Referencia: https://developer.android.com/develop/ui/compose/system/icon_design_adaptive

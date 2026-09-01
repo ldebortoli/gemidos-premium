@@ -6,13 +6,14 @@ Entregar Gemidos PREMIUM como aplicacion Android nativa mantenible: cuenta regre
 
 ## Tarea actual
 
-Entrega completada: los candidatos 2 a 8 estan integrados, excluyendo 1/462; no queda trabajo de implementacion en este proyecto. El mismo pedido se envio a la tarea `Diseña Linterna Premium`, que ya figura activa y trabaja en su repositorio independiente; el usuario autorizo ese traspaso como alternativa a implementarlo aqui. No se presupone terminada la otra tarea.
+Icono corregido y validado; no quedan tareas de implementacion activas. La correccion aparecera al generar/instalar la proxima APK desde Apps Dashboard. El pedido anterior de sonidos esta terminado en este proyecto y fue enviado a `Diseña Linterna Premium` para implementacion independiente.
 
 ## Estado actual
 
 - Memoria persistente inicializada y reconciliada con el proyecto real.
 - Rama primaria `main`; remoto privado `https://github.com/ldebortoli/gemidos-premium.git`.
 - Android nativo Kotlin/Compose con paquete `com.gemidospremium.app`, version 0.1.0 y variantes `demo`/`play`.
+- Icono: boca y ambas ondas reducidas uniformemente al 70 %, traslacion -3/-1 sobre pivote 54/54. Radio visible medido 27,49 dp, dentro del circulo seguro de 33 dp; antes llegaba a 43,57 dp y la onda exterior se recortaba. Legacy/adaptativo y splash comparten el mismo vector. Comparacion local revisada en `artifacts/launcher-icon-comparison.png` y vista corregida en `artifacts/launcher-icon-fixed.png` (ignoradas por Git).
 - La cuenta regresiva 10 a 0 inicia al entrar; al llegar a cero el reproductor local solicita foco transitorio y eleva temporalmente el canal multimedia al maximo permitido.
 - El contador muestra solo `Se viene...` sobre el numero, sin explicacion inferior.
 - `Apagado plebeyo` es texto pequeno sin superficie de boton: detiene gratis e inmediatamente y reinicia la cuenta en 10, sin aviso, pantalla silenciada ni control intermedio. `APAGADO PREMIUM` ofrece compra simulada en demo y, cuando hay licencia, silencia/restaura tras el fade de 1,5 segundos mientras una capa visual continua durante 15 segundos con felicitacion localizada, una tragamonedas central, cuatro minis distribuidas, luces perimetrales, 120 particulas y cinco fuegos artificiales.
@@ -21,6 +22,7 @@ Entrega completada: los candidatos 2 a 8 estan integrados, excluyendo 1/462; no 
 - El selector conserva las 21 opciones de idioma de Linterna Premium y todos los textos visibles especificos tienen catalogo completo.
 - Audio: edicion transformada del MP3 suministrado por el usuario, 9,863 s, 139.141 bytes y SHA-256 `D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E`; se reproduce en loop y su procedencia/limitacion de derechos queda documentada en `docs/AUDIO_LICENSE.md`.
 - Validacion: 12 pruebas nuevas del plan y 18 pruebas Android, cero fallos. Cobertura 100 % del validador (lineas/ramas/funciones) y dominio Android (instrucciones/ramas/lineas/complejidad/metodos/clases); umbrales en scripts y Gradle. `npm run test:audio` verifica duracion, picos y silencios con FFmpeg. Gradle `jacocoTestReport jacocoTestCoverageVerification lintDemoDebug` correcto. Sin APK y sin monitorizar CI.
+- Validacion del icono: `npm test`, compilacion de recursos mediante pruebas Android, JaCoCo y Android Lint correctos; render local del vector con dos mascaras y comprobacion pixel a pixel de su contencion. `tools/verify-project.mjs` protege escala, dos ondas y reutilizacion del dibujo en las variantes/splash.
 - `npm test` y `npm run test:audio` tambien pasan sobre un checkout nuevo del indice con `core.autocrlf=true`. Escaneo de secretos/rutas personales agregadas sin hallazgos; GitHub sigue reportando `security_and_analysis: null` para el repositorio privado personal (bloqueo de plan documentado).
 - El run CI inicial `33278253748` fallo solo en Android Lint: el runner conoce API 37 Preview y, con `warningsAsErrors`, elevo `OldTargetApi` sobre `targetSdk = 36`. Se mantiene API 36 estable y se deshabilita unicamente ese diagnostico; el resto de lint sigue estricto. `tools/verify-project.mjs` protege este contrato.
 - Apps Dashboard 0.2.11 incorpora `gemidos-premium` como cuarto perfil bundled Android nativo. La carga real valido la raiz Git; commit del Dashboard `056e26c` publicado en `main`.

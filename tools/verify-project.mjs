@@ -11,6 +11,9 @@ const requiredFiles = [
   "apps/mobile/app.json",
   "apps/mobile/android/app/src/main/AndroidManifest.xml",
   "apps/mobile/android/app/src/main/res/values/strings.xml",
+  "apps/mobile/android/app/src/main/res/drawable/ic_launcher_foreground.xml",
+  "apps/mobile/android/app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+  "apps/mobile/android/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
   "apps/mobile/android/app/src/main/res/raw/prank_moans.mp3",
   "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/domain/GemidosEngine.kt",
@@ -51,6 +54,27 @@ if (errors.length === 0) {
   const mobilePackage = JSON.parse(read("apps/mobile/package.json"));
   const appConfig = JSON.parse(read("apps/mobile/app.json"));
   const strings = read("apps/mobile/android/app/src/main/res/values/strings.xml");
+  const launcherForeground = read("apps/mobile/android/app/src/main/res/drawable/ic_launcher_foreground.xml");
+  if (
+    !launcherForeground.includes('android:scaleX="0.7"') ||
+    !launcherForeground.includes('android:scaleY="0.7"') ||
+    !launcherForeground.includes('android:translateX="-3"') ||
+    !launcherForeground.includes('android:translateY="-1"') ||
+    (launcherForeground.match(/android:strokeColor=/g) || []).length !== 2
+  ) {
+    errors.push("El icono debe conservar sus dos ondas reducidas y centradas dentro de la zona segura");
+  }
+  for (const directory of ["mipmap-anydpi", "mipmap-anydpi-v26"]) {
+    for (const name of ["ic_launcher", "ic_launcher_round"]) {
+      const launcher = read(`apps/mobile/android/app/src/main/res/${directory}/${name}.xml`);
+      if (!launcher.includes('@drawable/ic_launcher_foreground') || !launcher.includes('@color/launcher_background')) {
+        errors.push(`${directory}/${name} debe reutilizar el simbolo y fondo de Gemidos`);
+      }
+    }
+  }
+  if (!read("apps/mobile/android/app/src/main/res/values/themes.xml").includes('@drawable/ic_launcher_foreground')) {
+    errors.push("El splash debe conservar el mismo simbolo del launcher");
+  }
 
   if (!engine.includes("countdown: Int = 10") && !read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/model/GemidosModels.kt").includes("countdown: Int = 10")) {
     errors.push("La cuenta regresiva debe comenzar en 10");

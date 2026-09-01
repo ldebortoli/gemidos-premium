@@ -4,26 +4,36 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#D7A0B1"
-        android:pathData="M19,55 C29,41 38,38 51,47 C64,38 73,41 83,55 C73,70 64,75 51,75 C38,75 29,70 19,55 Z" />
-    <path
-        android:fillColor="#5A2E3C"
-        android:pathData="M29,56 C40,52 45,54 51,58 C57,54 62,52 73,56 C65,64 59,67 51,67 C43,67 37,64 29,56 Z" />
-    <path
-        android:fillColor="#FFFFFF"
-        android:fillAlpha="0.48"
-        android:pathData="M29,50 C38,42 44,44 51,49 C45,48 38,49 29,53 Z" />
-    <path
-        android:fillColor="@android:color/transparent"
-        android:pathData="M78,42 C87,48 87,62 78,68"
-        android:strokeColor="#E8CF80"
-        android:strokeLineCap="round"
-        android:strokeWidth="4" />
-    <path
-        android:fillColor="@android:color/transparent"
-        android:pathData="M85,34 C99,44 99,66 85,76"
-        android:strokeColor="#E8CF80"
-        android:strokeLineCap="round"
-        android:strokeWidth="4" />
+    <!-- Keep both waves inside Android's centered 66 dp safe zone. -->
+    <group
+        android:name="launcher_artwork"
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:translateX="-3"
+        android:translateY="-1">
+        <path
+            android:fillColor="#D7A0B1"
+            android:pathData="M19,55 C29,41 38,38 51,47 C64,38 73,41 83,55 C73,70 64,75 51,75 C38,75 29,70 19,55 Z" />
+        <path
+            android:fillColor="#5A2E3C"
+            android:pathData="M29,56 C40,52 45,54 51,58 C57,54 62,52 73,56 C65,64 59,67 51,67 C43,67 37,64 29,56 Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:fillAlpha="0.48"
+            android:pathData="M29,50 C38,42 44,44 51,49 C45,48 38,49 29,53 Z" />
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M78,42 C87,48 87,62 78,68"
+            android:strokeColor="#E8CF80"
+            android:strokeLineCap="round"
+            android:strokeWidth="4" />
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M85,34 C99,44 99,66 85,76"
+            android:strokeColor="#E8CF80"
+            android:strokeLineCap="round"
+            android:strokeWidth="4" />
+    </group>
 </vector>
