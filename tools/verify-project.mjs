@@ -140,7 +140,7 @@ if (errors.length === 0) {
     premiumAudioGenerator.includes("mod(t\\,0.12)") ||
     premiumAudioGenerator.includes("mod(t\\,0.31)")
   ) {
-    errors.push("La pista Premium debe conservar sus fanfarrias y sumar los audios aprobados por tandas sin base constante");
+    errors.push("La pista Premium debe conservar sus fanfarrias y solapar completos los audios aprobados durante 15 segundos");
   }
   if (appConfig.app.name !== "Gemidos PREMIUM" || appConfig.app.android.package !== "com.gemidospremium.app") {
     errors.push("La identidad visible y el paquete deben pertenecer a Gemidos PREMIUM");
@@ -194,8 +194,8 @@ if (errors.length === 0) {
   const premiumAudioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg");
   const premiumAudioAsset = fs.readFileSync(premiumAudioPath);
   const premiumAudioHash = crypto.createHash("sha256").update(premiumAudioAsset).digest("hex").toUpperCase();
-  if (premiumAudioAsset.length !== 111244) errors.push("La pista Premium no coincide con el recurso verificado");
-  if (premiumAudioHash !== "C69B2D6F3023E118D955D88E2FC68F6F9B933F25DC7EB993BE15F12E0950ABDE") {
+  if (premiumAudioAsset.length !== 157605) errors.push("La pista Premium no coincide con el recurso verificado");
+  if (premiumAudioHash !== "191CB456CA2CBEF6FE08F1E94857DC1D07463F4BE5143416216C0D2E39C985D6") {
     errors.push("El hash de los sonidos Premium no coincide con la mezcla documentada");
   }
 }

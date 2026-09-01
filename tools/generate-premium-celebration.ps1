@@ -91,14 +91,14 @@ try {
 
     $filterParts = New-Object 'System.Collections.Generic.List[string]'
     $filterParts.Add("[1:a]asplit=5[j0][j1][j2][j3][j4]")
-    $jingleDelays = @(200, 3200, 6200, 9200, 12200)
+    $jingleDelays = @(0, 3200, 6200, 9200, 12200)
     for ($index = 0; $index -lt 5; $index++) {
         $filterParts.Add("[j$index]adelay=$($jingleDelays[$index])[dj$index]")
     }
 
-    $filterParts.Add("[2:a]aeval='val(0)*exp(-55*mod(t\,0.16))*lt(mod(t\,0.16)\,0.050)',highpass=f=650,lowpass=f=6500,asplit=5[c0][c1][c2][c3][c4]")
-    $clapDelays = @(1150, 4150, 7150, 10150, 13150)
-    for ($index = 0; $index -lt 5; $index++) {
+    $filterParts.Add("[2:a]aeval='val(0)*exp(-55*mod(t\,0.16))*lt(mod(t\,0.16)\,0.050)',highpass=f=650,lowpass=f=6500,asplit=6[c0][c1][c2][c3][c4][c5]")
+    $clapDelays = @(950, 3950, 6950, 9950, 12950, 13950)
+    for ($index = 0; $index -lt 6; $index++) {
         $filterParts.Add("[c$index]adelay=$($clapDelays[$index])[dc$index]")
     }
 
@@ -113,12 +113,12 @@ try {
     }
 
     $jingleInputs = (0..4 | ForEach-Object { "[dj$_]" }) -join ""
-    $clapInputs = (0..4 | ForEach-Object { "[dc$_]" }) -join ""
+    $clapInputs = (0..5 | ForEach-Object { "[dc$_]" }) -join ""
     $voiceInputs = (0..4 | ForEach-Object { "[dv$($_)a][dv$($_)b]" }) -join ""
     $mixInputs = "[0:a]$jingleInputs$clapInputs$voiceInputs"
     $filterParts.Add(
-        $mixInputs + "amix=inputs=21:duration=longest:normalize=0,volume=1.65," +
-        "alimiter=limit=0.88,afade=t=in:st=0:d=0.04,afade=t=out:st=14.65:d=0.35[out]"
+        $mixInputs + "amix=inputs=22:duration=longest:normalize=0,volume=1.65," +
+        "alimiter=limit=0.88[out]"
     )
     $filter = $filterParts -join ";"
 
@@ -145,8 +145,8 @@ try {
         throw "FFmpeg no pudo generar la pista de festejo."
     }
 
-    # Preserve the existing fanfares/cheers and add only the user-approved sounds.
-    # The plan limits overlap and keeps silent gaps; no source is looped.
+    # Preserve the existing fanfares/cheers, then overlap complete approved clips.
+    # Every source starts at offset zero and plays to its natural end; no clip is looped.
     $culture = [Globalization.CultureInfo]::InvariantCulture
     $mixArguments = @("-hide_banner", "-loglevel", "error", "-y", "-i", $foundationPath)
     $mixFilters = New-Object 'System.Collections.Generic.List[string]'
@@ -156,23 +156,18 @@ try {
         $event = $plan.events[$index]
         $source = $plan.sources | Where-Object { $_.candidate -eq $event.candidate }
         $mixArguments += @("-i", (Join-Path $SourceDirectory $source.file))
-        $offset = ($event.offsetMs / 1000.0).ToString($culture)
-        $duration = ($event.durationMs / 1000.0).ToString($culture)
-        $fadeOut = (($event.durationMs / 1000.0) - 0.16).ToString($culture)
         $gain = $event.gain.ToString($culture)
         $inputIndex = $index + 1
         $mixFilters.Add(
             "[$($inputIndex):a]aresample=44100,aformat=channel_layouts=mono," +
-            "atrim=start=$($offset):duration=$duration,asetpts=PTS-STARTPTS," +
-            "volume=$gain,afade=t=in:d=0.025,afade=t=out:st=$($fadeOut):d=0.16," +
+            "asetpts=PTS-STARTPTS,volume=$gain," +
             "adelay=$($event.startMs)[event$index]"
         )
         $mixLabels += "[event$index]"
     }
     $mixFilters.Add(
         $mixLabels + "amix=inputs=$($plan.events.Count + 1):duration=longest:normalize=0," +
-        "alimiter=limit=0.85:level=false:latency=true," +
-        "afade=t=out:st=14.65:d=0.35[out]"
+        "alimiter=limit=0.85:level=false:latency=true[out]"
     )
     $mixArguments += @(
         "-filter_complex", ($mixFilters -join ";"), "-map", "[out]",

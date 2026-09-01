@@ -11,8 +11,8 @@ La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de 
 - Reproducción local en loop, sin red, de un MP3 editado de 9,86 segundos.
 - Volumen multimedia temporal al máximo, foco transitorio y restauración idempotente.
 - Apagado plebeyo como texto pequeño: corta gratis y reinicia la cuenta automáticamente, sin pantalla intermedia.
-- Apagado Premium extragrande con fade, cinco tragamonedas distribuidas, luces, confeti, múltiples fuegos artificiales, felicitación localizada y cinco festejos puntuales con fanfarria, aplausos y vítores durante 15 segundos.
-- Siete efectos reales de fiesta/premio elegidos por el usuario, mezclados por tandas sobre los sonidos previos: nunca dos casinos simultáneos y sin fondo constante.
+- Apagado Premium extragrande con fade, cinco tragamonedas distribuidas, luces, confeti, múltiples fuegos artificiales, felicitación localizada y festejos continuos durante 15 segundos.
+- Siete efectos reales de fiesta/premio elegidos por el usuario, reproducidos completos y solapados sobre los sonidos previos; algunos se repiten para que la animación no tenga pausas audibles.
 - Compra simulada en `demo`; Google Play Billing real preparado en `play`.
 - Banner de prueba en `demo`; AdMob/UMP preparado en `play`.
 - Selector persistente con las 21 opciones de idioma de Linterna PREMIUM.
@@ -42,7 +42,7 @@ npm run coverage
 npm run lint
 ```
 
-`npm run coverage` exige 100% de instrucciones, ramas, líneas y métodos en el dominio cubierto. `npm test` agrega 12 pruebas del plan sonoro y exige 100% de líneas, ramas y funciones de su validador. Las pruebas Android y lint usan `demoDebug`; no necesitan Play Console ni AdMob reales. La comprobación acústica opcional `npm run test:audio` requiere FFmpeg local y valida duración, picos y pausas; no se ejecuta en CI. La regeneración y las fuentes se detallan en `docs/AUDIO_LICENSE.md`.
+`npm run coverage` exige 100% de instrucciones, ramas, líneas y métodos en el dominio cubierto. `npm test` agrega 14 pruebas del plan sonoro y exige 100% de líneas, ramas y funciones de su validador. Las pruebas Android y lint usan `demoDebug`; no necesitan Play Console ni AdMob reales. La comprobación acústica opcional `npm run test:audio` requiere FFmpeg local y valida duración, picos y continuidad en ventanas de 50 ms; no se ejecuta en CI. La regeneración y las fuentes se detallan en `docs/AUDIO_LICENSE.md`.
 
 ## APK y variantes
 

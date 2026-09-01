@@ -117,3 +117,11 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Motivo: la onda exterior alcanzaba 43,57 dp desde el centro y se recortaba con la mascara circular de radio 36 dp. El dibujo corregido, incluyendo trazos y antialiasing, alcanza 27,49 dp: queda dentro del circulo seguro de radio 33 dp recomendado por Android. La correccion no requiere rasterizar ni regenerar el diseño.
 - Verificacion: render local del vector antes/despues con mascaras circular y rectangular redondeada, comprobacion de todos los pixeles del simbolo contra el circulo seguro y contrato de escala/ondas/referencias compartidas en `tools/verify-project.mjs`.
 - Referencia: https://developer.android.com/develop/ui/compose/system/icon_design_adaptive
+
+## D-017 - Festejos completos y continuos durante 15 segundos
+
+- Estado: vigente; reemplaza los descansos, recortes y fades definidos en D-014 y D-015, pero conserva su seleccion de sonidos y la exclusion de 1/462.
+- Fecha: 2026-09-01.
+- Decision: reproducir cada aparicion de los siete efectos Mixkit desde el inicio hasta su final natural, repetir completos los candidatos 8, 3 y 5, y cruzar las transiciones para cubrir de 0 a 15 segundos sin pausas audibles. Conservar las fanfarrias, vitores y aplausos generados; iniciar la primera fanfarria en cero y agregar un aplauso final. Limitar el solapamiento a cuatro efectos aprobados, tres humanos y dos de casino; los cruces de casino duran como maximo 250 ms.
+- Motivo: el usuario aprobo los sonidos pero rechazo los silencios entre ellos y pidio que la fiesta no se interrumpa durante toda la animacion. El mismo requerimiento se envio a la tarea `Diseña Linterna Premium` para su implementacion independiente.
+- Validacion: el plan impide recortes, offsets, huecos y exceso de simultaneidad; la prueba acustica exige senal audible en 300 ventanas consecutivas de 50 ms y en cada segundo de la pista.

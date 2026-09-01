@@ -12,23 +12,16 @@
     { "candidate": 7, "id": 1934, "title": "Payout award", "kind": "casino", "durationMs": 4100, "file": "07-premio-payout.mp3", "sha256": "9F6CBD67E156E9EE4EA2BBF7EC3AF14BEDC0D82A8B6DEF1443450C4089F14B23" },
     { "candidate": 8, "id": 1928, "title": "Slot machine win", "kind": "casino", "durationMs": 5040, "file": "08-tragaperras-premio.mp3", "sha256": "95B4079AB5646329B02B1704CB44F225CF35E430FB06DE2B6957272254A8C6DC" }
   ],
-  "bursts": [
-    { "startMs": 200, "endMs": 2400 },
-    { "startMs": 3200, "endMs": 5400 },
-    { "startMs": 6200, "endMs": 8400 },
-    { "startMs": 9200, "endMs": 11400 },
-    { "startMs": 12200, "endMs": 14500 }
-  ],
   "events": [
-    { "candidate": 8, "startMs": 200, "offsetMs": 300, "durationMs": 2050, "gain": 0.42 },
-    { "candidate": 2, "startMs": 450, "offsetMs": 200, "durationMs": 1900, "gain": 0.58 },
-    { "candidate": 7, "startMs": 3200, "offsetMs": 800, "durationMs": 2050, "gain": 0.44 },
-    { "candidate": 3, "startMs": 3450, "offsetMs": 150, "durationMs": 1900, "gain": 0.64 },
-    { "candidate": 4, "startMs": 6350, "offsetMs": 120, "durationMs": 2000, "gain": 0.60 },
-    { "candidate": 5, "startMs": 6970, "offsetMs": 0, "durationMs": 1030, "gain": 0.65 },
-    { "candidate": 8, "startMs": 9200, "offsetMs": 2300, "durationMs": 2050, "gain": 0.42 },
-    { "candidate": 6, "startMs": 9740, "offsetMs": 0, "durationMs": 940, "gain": 0.72 },
-    { "candidate": 7, "startMs": 12200, "offsetMs": 0, "durationMs": 2000, "gain": 0.44 },
-    { "candidate": 2, "startMs": 12600, "offsetMs": 2800, "durationMs": 1800, "gain": 0.60 }
+    { "candidate": 8, "startMs": 0, "offsetMs": 0, "durationMs": 5040, "gain": 0.42 },
+    { "candidate": 2, "startMs": 180, "offsetMs": 0, "durationMs": 5380, "gain": 0.58 },
+    { "candidate": 7, "startMs": 4850, "offsetMs": 0, "durationMs": 4100, "gain": 0.44 },
+    { "candidate": 3, "startMs": 5200, "offsetMs": 0, "durationMs": 4320, "gain": 0.64 },
+    { "candidate": 5, "startMs": 7000, "offsetMs": 0, "durationMs": 1030, "gain": 0.65 },
+    { "candidate": 4, "startMs": 8600, "offsetMs": 0, "durationMs": 6400, "gain": 0.60 },
+    { "candidate": 8, "startMs": 8800, "offsetMs": 0, "durationMs": 5040, "gain": 0.42 },
+    { "candidate": 6, "startMs": 10500, "offsetMs": 0, "durationMs": 940, "gain": 0.72 },
+    { "candidate": 3, "startMs": 10550, "offsetMs": 0, "durationMs": 4320, "gain": 0.64 },
+    { "candidate": 5, "startMs": 13850, "offsetMs": 0, "durationMs": 1030, "gain": 0.65 }
   ]
 }

@@ -26,9 +26,14 @@ function rms(startMs, endMs) {
   for (let index = start; index < end; index++) sum += decoded.stdout.readFloatLE(index * 4) ** 2;
   return Math.sqrt(sum / (end - start));
 }
-for (const [index, burst] of plan.bursts.entries()) {
-  assert.ok(rms(burst.startMs, burst.endMs) > 0.02, `La tanda ${index + 1} debe ser audible`);
-  const next = plan.bursts[index + 1];
-  if (next) assert.ok(rms(burst.endMs + 100, next.startMs - 100) < 0.0018, `El descanso ${index + 1} debe ser silencio real`);
+let quietWindows = 0;
+for (let startMs = 0; startMs < plan.durationMs; startMs += 50) {
+  const windowRms = rms(startMs, Math.min(startMs + 50, plan.durationMs));
+  if (windowRms < 0.001) quietWindows++;
+  assert.ok(windowRms >= 0.001, `Hay un hueco audible entre ${startMs} y ${startMs + 50} ms`);
 }
-console.log(`Audio verificado: ${(samples / plan.sampleRate).toFixed(3)} s decodificados, pico ${(20 * Math.log10(peak)).toFixed(1)} dBFS, cinco tandas audibles y cuatro descansos sin fondo.`);
+for (let startMs = 0; startMs < plan.durationMs; startMs += 1000) {
+  assert.ok(rms(startMs, Math.min(startMs + 1000, plan.durationMs)) > 0.02, `El segundo ${startMs / 1000 + 1} debe conservar festejos audibles`);
+}
+assert.equal(quietWindows, 0);
+console.log(`Audio verificado: ${(samples / plan.sampleRate).toFixed(3)} s decodificados, pico ${(20 * Math.log10(peak)).toFixed(1)} dBFS y 300 ventanas consecutivas sin silencios.`);
