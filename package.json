@@ -4,8 +4,10 @@
   "private": true,
   "description": "Herramientas de desarrollo para la app Android Gemidos PREMIUM.",
   "scripts": {
-    "test": "node tools/verify-project.mjs && npm --prefix apps/mobile run test",
+    "test": "npm run test:audio-plan && node tools/verify-project.mjs && npm --prefix apps/mobile run test",
+    "test:audio-plan": "node --test --experimental-test-coverage --test-coverage-include=tools/premium-celebration-plan.mjs --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 tools/premium-celebration-plan.test.mjs",
     "test:android": "npm --prefix apps/mobile run test:android",
+    "test:audio": "node tools/verify-premium-audio.mjs",
     "coverage": "npm --prefix apps/mobile run coverage",
     "lint": "npm --prefix apps/mobile run lint",
     "check:version": "node tools/verify-version.mjs",
@@ -13,6 +15,6 @@
     "install:android": "npm --prefix apps/mobile run install:android"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   }
 }

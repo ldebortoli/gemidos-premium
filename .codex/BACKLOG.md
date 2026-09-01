@@ -2,6 +2,7 @@
 
 - [P1] Configurar Play Console, producto Premium, AdMob, politica publica y pruebas en telefono real antes de una publicacion comercial.
 - [P2] Revisar el contenido y la clasificacion etaria exigida por Google Play antes de distribuir fuera de un grupo privado de pruebas.
+- [P2] Antes de distribuir fuera de pruebas privadas, confirmar compatibilidad del contenido sugestivo con las condiciones de uso aceptable de Mixkit/Envato para los nuevos efectos; no asumir que una licencia gratuita carece de restricciones de uso.
 - [P2] Activar GitHub Secret Scanning y Push Protection [BLOCKED: el repositorio es privado y pertenece a la cuenta personal `ldebortoli`; la API de GitHub devolvio HTTP 422 `Secret scanning is not available for this repository` y `security_and_analysis: null`, por lo que el plan/tipo de repositorio actual no ofrece ambas protecciones].
 
 # IN PROGRESS
@@ -10,6 +11,7 @@ No hay tareas en curso.
 
 # DONE
 
+- [2026-09-01] Integrar los siete efectos Mixkit aprobados (2 a 8, excluir 1/462) sobre los sonidos Premium anteriores, por cinco tandas con descansos y un solo premio/casino simultaneo; documentar fuentes/licencia/hashes y conservar MP3 fuera de Git. Validar 12 pruebas del plan, 18 Android, cobertura 100 % de ambos alcances, lint, picos/silencios, regeneracion byte a byte y checkout del indice con core.autocrlf=true. Enviar el mismo pedido a `Diseña Linterna Premium`, ya activa. Sin APK ni seguimiento de CI.
 - [2026-08-31] Rehacer la pista Premium sin sonido constante: conservar cinco fanfarrias de premio, agregar `Hurra`, `Vamos`, `Premio`, `Bravo`, `Woohoo` y cinco rafagas de aplausos, dejar silencios reales entre bloques y versionar un generador determinista; verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-31] Crear e integrar una pista Ogg Vorbis original de 15 segundos con clics de tragamonedas, monedas/campanillas y cinco fanfarrias de premio; sincronizarla con Premium, detenerla al salir/reiniciar/restablecer, documentar hash/procedencia y verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.
 - [2026-08-31] Extender Apagado Premium: conservar el silencio/restaurado a los 1,5 segundos, mantener 15 segundos de animacion, mostrar felicitacion en las 21 opciones de idioma y sumar cuatro tragamonedas distribuidas ademas de la central; verificar contratos, 18 pruebas, cobertura 100% y lint local sin generar APK.

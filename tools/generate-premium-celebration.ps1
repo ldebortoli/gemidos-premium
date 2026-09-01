@@ -1,11 +1,31 @@
 [CmdletBinding()]
-param()
+param(
+    [string]$SourceDirectory
+)
 
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Speech
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $outputPath = Join-Path $projectRoot "apps\mobile\android\app\src\main\res\raw\premium_slot_celebration.ogg"
+$planPath = Join-Path $PSScriptRoot "premium-celebration-plan.json"
+$plan = Get-Content -Raw -LiteralPath $planPath | ConvertFrom-Json
+& node (Join-Path $PSScriptRoot "premium-celebration-plan.mjs")
+if ($LASTEXITCODE -ne 0) { throw "El plan de mezcla no cumple los limites de la celebracion." }
+if (-not $SourceDirectory) {
+    $SourceDirectory = Join-Path $projectRoot "artifacts\audio-sources"
+}
+[IO.Directory]::CreateDirectory($SourceDirectory) | Out-Null
+foreach ($source in $plan.sources) {
+    $sourcePath = Join-Path $SourceDirectory $source.file
+    if (-not (Test-Path -LiteralPath $sourcePath)) {
+        $sourceUrl = "https://assets.mixkit.co/active_storage/sfx/$($source.id)/$($source.id)-preview.mp3"
+        Invoke-WebRequest -Uri $sourceUrl -OutFile $sourcePath
+    }
+    if ((Get-FileHash -LiteralPath $sourcePath -Algorithm SHA256).Hash -ne $source.sha256) {
+        throw "El audio $($source.candidate) cambio: revisar antes de integrarlo."
+    }
+}
 $tempRoot = [IO.Path]::GetFullPath($env:TEMP)
 $workPath = [IO.Path]::GetFullPath(
     (Join-Path $tempRoot ("gemidos-premium-cheers-" + [guid]::NewGuid().ToString("N")))
@@ -15,6 +35,7 @@ if (-not $workPath.StartsWith($tempPrefix, [StringComparison]::OrdinalIgnoreCase
     throw "La ruta de trabajo temporal quedo fuera del directorio permitido."
 }
 [IO.Directory]::CreateDirectory($workPath) | Out-Null
+$foundationPath = Join-Path $workPath "original-celebration.ogg"
 
 function New-CheerWave {
     param(
@@ -113,15 +134,56 @@ try {
     $ffmpegArguments += @(
         "-filter_complex", $filter,
         "-map", "[out]", "-t", "15", "-ac", "1", "-ar", "44100",
-        "-c:a", "libvorbis", "-q:a", "4", "-serial_offset", "4242", "-map_metadata", "-1",
+        "-c:a", "libvorbis", "-q:a", "4", "-fflags", "+bitexact", "-flags:a", "+bitexact",
+        "-serial_offset", "4242", "-map_metadata", "-1",
         "-metadata", "title=Gemidos Premium Prize Celebration",
         "-metadata", "comment=Original prize fanfares, synthesized applause and generated cheers",
-        $outputPath
+        $foundationPath
     )
     & ffmpeg @ffmpegArguments
     if ($LASTEXITCODE -ne 0) {
         throw "FFmpeg no pudo generar la pista de festejo."
     }
+
+    # Preserve the existing fanfares/cheers and add only the user-approved sounds.
+    # The plan limits overlap and keeps silent gaps; no source is looped.
+    $culture = [Globalization.CultureInfo]::InvariantCulture
+    $mixArguments = @("-hide_banner", "-loglevel", "error", "-y", "-i", $foundationPath)
+    $mixFilters = New-Object 'System.Collections.Generic.List[string]'
+    $mixFilters.Add("[0:a]volume=$($plan.foundationGain.ToString($culture))[foundation]")
+    $mixLabels = "[foundation]"
+    for ($index = 0; $index -lt $plan.events.Count; $index++) {
+        $event = $plan.events[$index]
+        $source = $plan.sources | Where-Object { $_.candidate -eq $event.candidate }
+        $mixArguments += @("-i", (Join-Path $SourceDirectory $source.file))
+        $offset = ($event.offsetMs / 1000.0).ToString($culture)
+        $duration = ($event.durationMs / 1000.0).ToString($culture)
+        $fadeOut = (($event.durationMs / 1000.0) - 0.16).ToString($culture)
+        $gain = $event.gain.ToString($culture)
+        $inputIndex = $index + 1
+        $mixFilters.Add(
+            "[$($inputIndex):a]aresample=44100,aformat=channel_layouts=mono," +
+            "atrim=start=$($offset):duration=$duration,asetpts=PTS-STARTPTS," +
+            "volume=$gain,afade=t=in:d=0.025,afade=t=out:st=$($fadeOut):d=0.16," +
+            "adelay=$($event.startMs)[event$index]"
+        )
+        $mixLabels += "[event$index]"
+    }
+    $mixFilters.Add(
+        $mixLabels + "amix=inputs=$($plan.events.Count + 1):duration=longest:normalize=0," +
+        "alimiter=limit=0.85:level=false:latency=true," +
+        "afade=t=out:st=14.65:d=0.35[out]"
+    )
+    $mixArguments += @(
+        "-filter_complex", ($mixFilters -join ";"), "-map", "[out]",
+        "-t", "15", "-ac", "1", "-ar", "44100", "-c:a", "libvorbis", "-q:a", "4",
+        "-fflags", "+bitexact", "-flags:a", "+bitexact", "-serial_offset", "4242", "-map_metadata", "-1",
+        "-metadata", "title=Gemidos Premium layered prize celebration",
+        "-metadata", "comment=Original fanfares and cheers with selected Mixkit SFX; see docs/AUDIO_LICENSE.md",
+        $outputPath
+    )
+    & ffmpeg @mixArguments
+    if ($LASTEXITCODE -ne 0) { throw "FFmpeg no pudo mezclar los siete efectos aprobados." }
 
     & ffprobe -v error -show_entries "format=duration,size,bit_rate:stream=codec_name,sample_rate,channels" -of "default=noprint_wrappers=1" $outputPath
     Get-FileHash $outputPath -Algorithm SHA256

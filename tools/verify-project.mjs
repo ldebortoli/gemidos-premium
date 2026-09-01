@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { plan, validateCelebrationPlan } from "./premium-celebration-plan.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), "utf8");
@@ -22,11 +23,15 @@ const requiredFiles = [
   "apps/mobile/android/app/src/play/AndroidManifest.xml",
   ".github/workflows/ci.yml",
   "tools/generate-premium-celebration.ps1",
+  "tools/premium-celebration-plan.json",
+  "tools/premium-celebration-plan.test.mjs",
+  "tools/verify-premium-audio.mjs",
   "docs/AUDIO_LICENSE.md",
   "docs/CONFIGURACION_GOOGLE.md",
   "docs/PRIVACIDAD.md",
 ];
 const errors = [];
+validateCelebrationPlan(plan);
 
 for (const relativePath of requiredFiles) {
   if (!fs.existsSync(path.join(root, relativePath))) errors.push(`Falta ${relativePath}`);
@@ -106,10 +111,12 @@ if (errors.length === 0) {
     !premiumAudioGenerator.includes('Text = "¡Bravo!"') ||
     !premiumAudioGenerator.includes("$jingleDelays") ||
     !premiumAudioGenerator.includes("$clapDelays") ||
+    !premiumAudioGenerator.includes("$plan.events") ||
+    !premiumAudioGenerator.includes("$source.sha256") ||
     premiumAudioGenerator.includes("mod(t\\,0.12)") ||
     premiumAudioGenerator.includes("mod(t\\,0.31)")
   ) {
-    errors.push("La pista Premium debe tener festejos puntuales sin base mecanica constante");
+    errors.push("La pista Premium debe conservar sus fanfarrias y sumar los audios aprobados por tandas sin base constante");
   }
   if (appConfig.app.name !== "Gemidos PREMIUM" || appConfig.app.android.package !== "com.gemidospremium.app") {
     errors.push("La identidad visible y el paquete deben pertenecer a Gemidos PREMIUM");
@@ -163,9 +170,9 @@ if (errors.length === 0) {
   const premiumAudioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg");
   const premiumAudioAsset = fs.readFileSync(premiumAudioPath);
   const premiumAudioHash = crypto.createHash("sha256").update(premiumAudioAsset).digest("hex").toUpperCase();
-  if (premiumAudioAsset.length !== 51546) errors.push("La pista Premium no coincide con el recurso verificado");
-  if (premiumAudioHash !== "7118D61B5A8B259B188FF898BC6B09658525BA2C27B36A2BFA800DA36E7930D1") {
-    errors.push("El hash de los sonidos Premium no coincide con el recurso original documentado");
+  if (premiumAudioAsset.length !== 111244) errors.push("La pista Premium no coincide con el recurso verificado");
+  if (premiumAudioHash !== "C69B2D6F3023E118D955D88E2FC68F6F9B933F25DC7EB993BE15F12E0950ABDE") {
+    errors.push("El hash de los sonidos Premium no coincide con la mezcla documentada");
   }
 }
 

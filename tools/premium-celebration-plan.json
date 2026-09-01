@@ -1,0 +1,34 @@
+{
+  "durationMs": 15000,
+  "sampleRate": 44100,
+  "foundationGain": 0.65,
+  "licenseUrl": "https://mixkit.co/license/#sfxFree",
+  "sources": [
+    { "candidate": 2, "id": 531, "title": "Birthday crowd party cheer", "kind": "people", "durationMs": 5380, "file": "02-festejo-cumpleanos.mp3", "sha256": "1868575F736B260A1B15B2A331E2A9C9BD1EB79D463BB4780552FC7844D7F7A9" },
+    { "candidate": 3, "id": 459, "title": "Male crowd cheering short", "kind": "people", "durationMs": 4320, "file": "03-grupo-hombres-festejo-corto.mp3", "sha256": "2BBDE3E55E1DD4766D278A7E34A00E6B9CC15BB61EF5F521D30ED59E9A3A0D4B" },
+    { "candidate": 4, "id": 437, "title": "Small crowd ovation", "kind": "people", "durationMs": 6400, "file": "04-ovacion-grupo-pequeno.mp3", "sha256": "21CC2A5E75D3CE8E26DEADEA8929FE11D5A6868EE839AEA058D7121834AFA78D" },
+    { "candidate": 5, "id": 2012, "title": "Males yes victory", "kind": "people", "durationMs": 1030, "file": "05-hombres-gritando-si-victoria.mp3", "sha256": "0E58B61C982C8453993B5115E121B001A5FD8F5780E2A22E57D1842DADEB6A6D" },
+    { "candidate": 6, "id": 2011, "title": "Male voice cheer victory", "kind": "people", "durationMs": 940, "file": "06-voz-masculina-festejo-victoria.mp3", "sha256": "DABCDDE0ABEC0F67BB3AE0016FD4F28D2979243A44B7A480272AAF5C5C4312E5" },
+    { "candidate": 7, "id": 1934, "title": "Payout award", "kind": "casino", "durationMs": 4100, "file": "07-premio-payout.mp3", "sha256": "9F6CBD67E156E9EE4EA2BBF7EC3AF14BEDC0D82A8B6DEF1443450C4089F14B23" },
+    { "candidate": 8, "id": 1928, "title": "Slot machine win", "kind": "casino", "durationMs": 5040, "file": "08-tragaperras-premio.mp3", "sha256": "95B4079AB5646329B02B1704CB44F225CF35E430FB06DE2B6957272254A8C6DC" }
+  ],
+  "bursts": [
+    { "startMs": 200, "endMs": 2400 },
+    { "startMs": 3200, "endMs": 5400 },
+    { "startMs": 6200, "endMs": 8400 },
+    { "startMs": 9200, "endMs": 11400 },
+    { "startMs": 12200, "endMs": 14500 }
+  ],
+  "events": [
+    { "candidate": 8, "startMs": 200, "offsetMs": 300, "durationMs": 2050, "gain": 0.42 },
+    { "candidate": 2, "startMs": 450, "offsetMs": 200, "durationMs": 1900, "gain": 0.58 },
+    { "candidate": 7, "startMs": 3200, "offsetMs": 800, "durationMs": 2050, "gain": 0.44 },
+    { "candidate": 3, "startMs": 3450, "offsetMs": 150, "durationMs": 1900, "gain": 0.64 },
+    { "candidate": 4, "startMs": 6350, "offsetMs": 120, "durationMs": 2000, "gain": 0.60 },
+    { "candidate": 5, "startMs": 6970, "offsetMs": 0, "durationMs": 1030, "gain": 0.65 },
+    { "candidate": 8, "startMs": 9200, "offsetMs": 2300, "durationMs": 2050, "gain": 0.42 },
+    { "candidate": 6, "startMs": 9740, "offsetMs": 0, "durationMs": 940, "gain": 0.72 },
+    { "candidate": 7, "startMs": 12200, "offsetMs": 0, "durationMs": 2000, "gain": 0.44 },
+    { "candidate": 2, "startMs": 12600, "offsetMs": 2800, "durationMs": 1800, "gain": 0.60 }
+  ]
+}

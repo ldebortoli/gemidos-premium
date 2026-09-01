@@ -99,3 +99,12 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 - Fecha: 2026-08-31.
 - Decision: quitar toda base mecanica/monedas repetitivas; conservar cinco fanfarrias de premio y acompanarlas con cinco rafagas puntuales de aplausos sintetizados y vitores generados mediante voces locales de Windows (`Hurra`, `Vamos`, `Premio`, `Bravo` y `Woohoo`), dejando aproximadamente un segundo de silencio real entre bloques.
 - Motivo: preservar el sonido de ganar aprobado por el usuario, eliminar la textura constante rechazada y hacer que cada evento de festejo tenga contraste y descanso audible.
+
+## D-015 - Siete efectos elegidos en tandas con descansos
+
+- Estado: vigente; amplia D-014 sin sustituir sus fanfarrias ni restaurar la base constante.
+- Fecha: 2026-09-01.
+- Decision: sumar a la composicion previa los candidatos Mixkit 2 a 8 (531, 459, 437, 2012, 2011, 1934, 1928), excluyendo expresamente 1/462. Distribuirlos en cinco tandas durante 15 segundos: como maximo un efecto de casino y dos humanos nuevos simultaneos, recortes de unos dos segundos para clips largos, gritos cortos completos, fades y descansos. Mantener reproductor, apagado/restaurado y animaciones intactos.
+- Motivo: incorporar la seleccion exacta del usuario sin amontonar todos los sonidos. El mismo pedido se envio a la tarea de Linterna Premium para implementacion independiente.
+- Trazabilidad: guardar fuentes/hashes/tiempos en un manifiesto, verificar sus limites con pruebas y conservar los MP3 fuente fuera de Git. Mixkit autoriza productos creativos bajo condiciones; documentar sus restricciones y revisar compatibilidad del contenido sugestivo antes de distribuir fuera de pruebas privadas.
+- Validacion: usar Node 24, ya fijado por CI, para exigir 100 % de lineas/ramas/funciones del validador; comprobar localmente con FFmpeg duracion, picos y descansos del OGG final. No agregar descargas ni FFmpeg al CI rapido.
