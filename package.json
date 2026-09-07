@@ -1,10 +1,10 @@
 {
   "name": "gemidos-premium-workspace",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Herramientas de desarrollo para la app Android Gemidos PREMIUM.",
   "scripts": {
-    "test": "npm run test:audio-plan && node tools/verify-project.mjs && npm --prefix apps/mobile run test",
+    "test": "npm run test:audio-plan && node --test tools/public-source.test.mjs && node tools/verify-project.mjs && npm --prefix apps/mobile run test",
     "test:audio-plan": "node --test --experimental-test-coverage --test-coverage-include=tools/premium-celebration-plan.mjs --test-coverage-lines=100 --test-coverage-branches=100 --test-coverage-functions=100 tools/premium-celebration-plan.test.mjs",
     "test:android": "npm --prefix apps/mobile run test:android",
     "test:audio": "node tools/verify-premium-audio.mjs",

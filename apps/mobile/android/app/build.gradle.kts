@@ -16,6 +16,17 @@ val versionProperties = Properties().apply {
 }
 val canonicalVersionName = versionProperties.getProperty("versionName")
 val canonicalVersionCode = versionProperties.getProperty("versionCode").toInt()
+val privateAudioCount = listOf("prank_moans.mp3", "premium_slot_celebration.ogg")
+    .count { file("src/main/res/raw/$it").isFile }
+val privateAudioPresent = privateAudioCount == 2
+val sourceOnlyQualityTasks = setOf(
+    "testDemoDebugUnitTest", "jacocoTestReport", "jacocoTestCoverageVerification", "lintDemoDebug",
+)
+val requestedTasks = gradle.startParameter.taskNames.map { it.substringAfterLast(':') }
+val sourceOnlyQualityRun = requestedTasks.isNotEmpty() && requestedTasks.all { it in sourceOnlyQualityTasks }
+if (privateAudioCount == 1 || (!privateAudioPresent && !sourceOnlyQualityRun)) {
+    throw GradleException("Faltan los audios privados. Ver docs/PUBLIC_SOURCE.md. No se generan APKs con recursos de prueba.")
+}
 val playAdMobAppId = providers.gradleProperty("GEMIDOSPREMIUM_ADMOB_APP_ID").orNull.orEmpty()
 val playBannerId = providers.gradleProperty("GEMIDOSPREMIUM_ADMOB_BANNER_ID").orNull.orEmpty()
 val internalTestKeystorePath = providers
@@ -24,6 +35,9 @@ val internalTestKeystorePath = providers
     .orEmpty()
 
 android {
+    if (!privateAudioPresent) {
+        sourceSets.getByName("main").res.srcDir("src/testFixtures/res")
+    }
     namespace = "com.gemidospremium.app"
     compileSdk = 36
 

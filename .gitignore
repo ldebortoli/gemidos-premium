@@ -30,3 +30,7 @@ reports/
 artifacts/
 *.log
 *.pid
+
+# Private audio stays local; never publish the binaries or history backups.
+apps/mobile/android/app/src/main/res/raw/*.mp3
+apps/mobile/android/app/src/main/res/raw/*.ogg

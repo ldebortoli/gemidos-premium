@@ -6,13 +6,16 @@ Entregar Gemidos PREMIUM como aplicacion Android nativa mantenible: cuenta regre
 
 ## Tarea actual
 
+- IN PROGRESS 2026-09-07: publicacion source-only autorizada desde la tarea Galerazo web. El propietario aprueba limpiar/re-escribir historial, conservar audios locales y preservar el remoto original como gemidos-premium-private-archive privado. Nueve commits filtrados; backup completo en artifacts/publication-backup/before-public.bundle, audios respaldados en esa carpeta. Crear un remoto limpio primero privado con el nombre original, verificar antes de abrirlo. No pushear el historial limpio al archivo privado antiguo. Version 0.1.1 para controles de build/publicacion, sin cambio de experiencia ni APK nueva.
+- Verificado localmente sin audios: 14 tests del plan + 2 controles de fuente publica, 18 pruebas Android y JaCoCo100% (796 instrucciones, 38 ramas, 153 lineas, 22 metodos), Lint correcto. Ensamblado dry-run sin audios y test dry-run con solo un audio rechazados con el mensaje esperado. Ambos audios restaurados desde el respaldo, ignorados por Git y con hashes intactos; contratos/plan/acustica300ventanas y cobertura con audios correctos. Nuevo repo independiente id1360702988 creado privado y vacio; original id1350942338 renombrado y mantenido privado. Falta push, comprobar referencias remotas, publicar y habilitar protecciones.
+
 Icono corregido y validado; no quedan tareas de implementacion activas. La correccion aparecera al generar/instalar la proxima APK desde Apps Dashboard. El pedido anterior de sonidos esta terminado en este proyecto y fue enviado a `Diseña Linterna Premium` para implementacion independiente.
 
 ## Estado actual
 
 - Memoria persistente inicializada y reconciliada con el proyecto real.
 - Rama primaria `main`; remoto privado `https://github.com/ldebortoli/gemidos-premium.git`.
-- Android nativo Kotlin/Compose con paquete `com.gemidospremium.app`, version 0.1.0 y variantes `demo`/`play`.
+- Android nativo Kotlin/Compose con paquete `com.gemidospremium.app`, version 0.1.1 / build2 y variantes `demo`/`play`.
 - Icono: boca y ambas ondas reducidas uniformemente al 70 %, traslacion -3/-1 sobre pivote 54/54. Radio visible medido 27,49 dp, dentro del circulo seguro de 33 dp; antes llegaba a 43,57 dp y la onda exterior se recortaba. Legacy/adaptativo y splash comparten el mismo vector. Comparacion local revisada en `artifacts/launcher-icon-comparison.png` y vista corregida en `artifacts/launcher-icon-fixed.png` (ignoradas por Git).
 - La cuenta regresiva 10 a 0 inicia al entrar; al llegar a cero el reproductor local solicita foco transitorio y eleva temporalmente el canal multimedia al maximo permitido.
 - El contador muestra solo `Se viene...` sobre el numero, sin explicacion inferior.

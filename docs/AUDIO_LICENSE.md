@@ -2,6 +2,8 @@
 
 ## Recurso actual
 
+Desde 0.1.1 estos recursos son exclusivamente locales y están excluidos del repositorio público y de su historial. Las menciones siguientes a integración describen la copia privada de la aplicación, no archivos descargables del repositorio. Ver `PUBLIC_SOURCE.md`.
+
 - Archivo fuente local suministrado por el usuario: `Voicy_gemi 2 audio troll.mp3`.
 - Fecha de recepción y transformación: 2026-08-31.
 - Archivo integrado: `apps/mobile/android/app/src/main/res/raw/prank_moans.mp3`.
@@ -27,7 +29,7 @@ El resultado se reproduce en loop mientras la pantalla permanece activa y hasta 
 
 No se recibió documentación de autoría o licencia junto con el archivo fuente. Las transformaciones técnicas anteriores no eliminan automáticamente derechos de autor ni constituyen una autorización de distribución. Antes de publicar la app fuera de pruebas privadas, el propietario del proyecto debe confirmar que posee una licencia o permiso suficiente para usar y redistribuir este audio.
 
-El MP3 fuente de Descargas no se copia al repositorio; solo se versiona la edición integrada. El recurso anterior de Pixabay fue reemplazado y ya no forma parte del binario actual.
+Ni el MP3 fuente ni su edición integrada se versionan en el repositorio público. El recurso anterior de Pixabay fue reemplazado y tampoco se conserva en el historial publicado.
 
 ## Celebracion Premium: composicion original y efectos Mixkit elegidos
 

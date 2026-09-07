@@ -23,6 +23,14 @@ if (rootPackage.version !== expectedName) errors.push("package.json no coincide 
 if (mobilePackage.version !== expectedName) errors.push("apps/mobile/package.json no coincide con version.properties");
 if (appConfig.app.version !== expectedName) errors.push("apps/mobile/app.json no coincide con version.properties");
 if (appConfig.app.android.versionCode !== expectedCode) errors.push("android.versionCode no coincide con version.properties");
+for (const relativePath of ["package-lock.json", "apps/mobile/package-lock.json"]) {
+  const lock = JSON.parse(fs.readFileSync(path.join(root, relativePath), "utf8"));
+  if (lock.version !== expectedName || lock.packages[""].version !== expectedName) {
+    errors.push(`${relativePath} no coincide con version.properties`);
+  }
+}
+const readme = fs.readFileSync(path.join(root, "README.md"), "utf8");
+if (!readme.includes(`## Alcance de la versión ${expectedName}`)) errors.push("README no coincide con version.properties");
 
 if (errors.length > 0) {
   console.error(errors.map((error) => `- ${error}`).join("\n"));

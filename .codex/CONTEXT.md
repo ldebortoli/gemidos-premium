@@ -7,7 +7,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Estado detectado
 
 - Ruta: `<project-root>`
-- Version: `0.1.0` (`versionCode` 1).
+- Version: `0.1.1` (`versionCode` 2).
 - Stack: Android nativo sobre Android 16 / API 36, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
 - Git: repositorio privado `ldebortoli/gemidos-premium`.
 - Rama primaria: `main`.
@@ -17,7 +17,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Estructura
 
 - `.codex/`: memoria persistente.
-- `apps/mobile/android/`: aplicacion Android nativa y recurso MP3 local.
+- `apps/mobile/android/`: aplicacion Android nativa, audios locales ignorados por Git y recursos de texto exclusivos de las pruebas source-only.
 - `tools/`: controles de identidad, version, audio y Gradle.
 - `docs/`: licencia de audio, privacidad, producto y configuracion comercial.
 - El perfil de Apps Dashboard vive en su repositorio independiente, bajo `config/projects/gemidos-premium.json`.
@@ -28,6 +28,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - Baseline: 18 pruebas Android, cero fallos, y 100% en instrucciones, ramas, lineas, complejidad, metodos y clases del dominio medido.
 - CI fija API 36 y conserva Android Lint estricto; solo `OldTargetApi` esta deshabilitado porque el runner conoce el SDK 37 Preview y elevaba ese aviso ambiental a error.
 - El APK se generara desde Apps Dashboard o solo por pedido explicito; la implementacion ordinaria no inicia Gradle para ensamblar un artefacto.
+- Codigo preparado para publicacion sin audios: historial filtrado con autorizacion, original remoto conservado privado con otro nombre. Ver D-018 y docs/PUBLIC_SOURCE.md. Tests JVM/cobertura/lint pueden compilar sin grabaciones; builds instalables exigen ambos audios privados. Restaurados y comprobados los hashes originales en la copia local; sin APK nueva.
 - El audio integrado es una edicion de 9,863 segundos del MP3 suministrado por el usuario, reproducida en loop; su SHA-256 es `D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E`.
 - El contador muestra solo `Se viene...` sobre el numero. Apagado plebeyo es texto pequeno y reinicia directamente en 10; Premium silencia y restaura el audio tras su fade de 1,5 segundos, mientras una celebracion independiente de 15 segundos muestra felicitacion localizada, cinco tragamonedas, luces, particulas y cinco fuegos artificiales.
 - La celebracion Premium reproduce una mezcla Ogg Vorbis continua de 15 segundos: conserva cinco fanfarrias, vitores y aplausos generados, y suma completos los siete efectos Mixkit aprobados (candidatos 2 a 8, nunca 1/462). Algunos clips se repiten completos y sus transiciones se solapan brevemente para cubrir toda la animacion sin pausas audibles; no se restaura el sonido mecanico constante descartado. Se detiene al salir, reiniciar o restablecer Premium. Fuentes, hashes y tiempos viven en `tools/premium-celebration-plan.json`; los MP3 fuente no se versionan.

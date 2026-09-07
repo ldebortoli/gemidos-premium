@@ -7,7 +7,7 @@
 
 # IN PROGRESS
 
-No hay tareas en curso.
+- [P1] IN PROGRESS: publicar solo codigo por pedido explicito del propietario; nueve commits filtrados, respaldo privado local verificado. Conservar el remoto original como gemidos-premium-private-archive privado y crear un repo limpio con URL original (segunda autorizacion expresa). Preparar 0.1.1, conservar audios localmente, verificar historial/secretos/tests, publicar y habilitar protecciones.
 
 # DONE
 

@@ -14,8 +14,6 @@ const requiredFiles = [
   "apps/mobile/android/app/src/main/res/drawable/ic_launcher_foreground.xml",
   "apps/mobile/android/app/src/main/res/mipmap-anydpi/ic_launcher.xml",
   "apps/mobile/android/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
-  "apps/mobile/android/app/src/main/res/raw/prank_moans.mp3",
-  "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/domain/GemidosEngine.kt",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/domain/PremiumSilenceRunner.kt",
   "apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPrankAudioPort.kt",
@@ -185,18 +183,26 @@ if (errors.length === 0) {
   }
 
   const audioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/prank_moans.mp3");
-  const audio = fs.readFileSync(audioPath);
-  const audioHash = crypto.createHash("sha256").update(audio).digest("hex").toUpperCase();
-  if (audio.length !== 139141) errors.push("El recurso de audio no coincide con la edicion verificada");
-  if (audioHash !== "D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E") {
-    errors.push("El hash del audio integrado no coincide con la edicion documentada");
+  if (fs.existsSync(audioPath)) {
+    const audio = fs.readFileSync(audioPath);
+    const audioHash = crypto.createHash("sha256").update(audio).digest("hex").toUpperCase();
+    if (audio.length !== 139141) errors.push("El recurso de audio no coincide con la edicion verificada");
+    if (audioHash !== "D4937B796316EC8C391F0BB5ECD19A205BCA0584D04F8EA010FC779EB61CFB1E") {
+      errors.push("El hash del audio integrado no coincide con la edicion documentada");
+    }
+  } else {
+    console.log("Audio privado principal ausente: se omite solo su comprobacion binaria.");
   }
   const premiumAudioPath = path.join(root, "apps/mobile/android/app/src/main/res/raw/premium_slot_celebration.ogg");
-  const premiumAudioAsset = fs.readFileSync(premiumAudioPath);
-  const premiumAudioHash = crypto.createHash("sha256").update(premiumAudioAsset).digest("hex").toUpperCase();
-  if (premiumAudioAsset.length !== 157605) errors.push("La pista Premium no coincide con el recurso verificado");
-  if (premiumAudioHash !== "191CB456CA2CBEF6FE08F1E94857DC1D07463F4BE5143416216C0D2E39C985D6") {
-    errors.push("El hash de los sonidos Premium no coincide con la mezcla documentada");
+  if (fs.existsSync(premiumAudioPath)) {
+    const premiumAudioAsset = fs.readFileSync(premiumAudioPath);
+    const premiumAudioHash = crypto.createHash("sha256").update(premiumAudioAsset).digest("hex").toUpperCase();
+    if (premiumAudioAsset.length !== 157605) errors.push("La pista Premium no coincide con el recurso verificado");
+    if (premiumAudioHash !== "191CB456CA2CBEF6FE08F1E94857DC1D07463F4BE5143416216C0D2E39C985D6") {
+      errors.push("El hash de los sonidos Premium no coincide con la mezcla documentada");
+    }
+  } else {
+    console.log("Audio privado Premium ausente: se omite solo su comprobacion binaria.");
   }
 }
 
@@ -205,4 +211,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log("Identidad, cuenta regresiva, audio restaurable, idiomas y separacion demo/Play verificados.");
+console.log("Contratos de identidad, cuenta regresiva, restauracion de audio, idiomas y demo/Play verificados.");
