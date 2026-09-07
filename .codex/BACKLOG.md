@@ -3,13 +3,14 @@
 - [P1] Configurar Play Console, producto Premium, AdMob, politica publica y pruebas en telefono real antes de una publicacion comercial.
 - [P2] Revisar el contenido y la clasificacion etaria exigida por Google Play antes de distribuir fuera de un grupo privado de pruebas.
 - [P2] Antes de distribuir fuera de pruebas privadas, confirmar compatibilidad del contenido sugestivo con las condiciones de uso aceptable de Mixkit/Envato para los nuevos efectos; no asumir que una licencia gratuita carece de restricciones de uso.
-- [P2] Activar GitHub Secret Scanning y Push Protection [BLOCKED: el repositorio es privado y pertenece a la cuenta personal `ldebortoli`; la API de GitHub devolvio HTTP 422 `Secret scanning is not available for this repository` y `security_and_analysis: null`, por lo que el plan/tipo de repositorio actual no ofrece ambas protecciones].
 
 # IN PROGRESS
 
-- [P1] IN PROGRESS: publicar solo codigo por pedido explicito del propietario; nueve commits filtrados, respaldo privado local verificado. Conservar el remoto original como gemidos-premium-private-archive privado y crear un repo limpio con URL original (segunda autorizacion expresa). Preparar 0.1.1, conservar audios localmente, verificar historial/secretos/tests, publicar y habilitar protecciones.
+No hay tareas en curso.
 
 # DONE
+
+- [2026-09-07] Publicado Gemidos Premium source-only 0.1.1 / build2, codigo56035d4: nueve commits saneados antes de publicar en un repositorio independiente con URL original. Original remoto preservado privado como gemidos-premium-private-archive y bundle/audio local respaldado. Ambos recursos locales restaurados con hashes intactos e ignorados. Sin grabaciones/rutas personales en historial publico; repo nuevo200, archivo privado y audio actual/commit anterior404 sin sesion. Secret Scanning y Push Protection habilitados/verificados. 16 pruebas Node,18 Android, coberturas100% del plan/dominio, Lint y acustica300ventanas correctos con originales; calidad source-only sin audios tambien aprobada y builds/pares incompletos rechazados. Sin APK, pagos, nuevos servicios ni seguimiento CI.
 
 - [2026-09-01] Convertir la celebracion Premium en una secuencia continua de 15 segundos: reproducir completos los siete efectos aprobados, repetir 8/3/5 y solaparlos sin pausas ni cortes, conservar los sonidos anteriores con fanfarria inicial y aplauso final, y enviar la misma orden a `Diseña Linterna Premium`. Mezcla de 157.605 bytes validada en 300 ventanas consecutivas de 50 ms sin silencios y regenerada dos veces byte a byte; 14 pruebas del plan, 18 Android, cobertura 100 % de ambos alcances y lint correctos. Sin APK ni seguimiento de CI.
 - [2026-09-01] Corregir el icono: reducir el simbolo al 70 %, centrarlo y conservar ambas ondas dentro de la zona segura; unificar variantes legacy/adaptativas y splash con el mismo foreground. Comparacion visual circular/redondeada y prueba de pixeles: radio maximo 27,49 dp frente al limite seguro 33 dp. Contratos, 12 pruebas del plan, 18 Android, cobertura 100 % en los alcances existentes y lint correctos. Sin APK ni seguimiento de CI.

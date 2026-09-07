@@ -6,15 +6,15 @@ Entregar Gemidos PREMIUM como aplicacion Android nativa mantenible: cuenta regre
 
 ## Tarea actual
 
-- IN PROGRESS 2026-09-07: publicacion source-only autorizada desde la tarea Galerazo web. El propietario aprueba limpiar/re-escribir historial, conservar audios locales y preservar el remoto original como gemidos-premium-private-archive privado. Nueve commits filtrados; backup completo en artifacts/publication-backup/before-public.bundle, audios respaldados en esa carpeta. Crear un remoto limpio primero privado con el nombre original, verificar antes de abrirlo. No pushear el historial limpio al archivo privado antiguo. Version 0.1.1 para controles de build/publicacion, sin cambio de experiencia ni APK nueva.
-- Verificado localmente sin audios: 14 tests del plan + 2 controles de fuente publica, 18 pruebas Android y JaCoCo100% (796 instrucciones, 38 ramas, 153 lineas, 22 metodos), Lint correcto. Ensamblado dry-run sin audios y test dry-run con solo un audio rechazados con el mensaje esperado. Ambos audios restaurados desde el respaldo, ignorados por Git y con hashes intactos; contratos/plan/acustica300ventanas y cobertura con audios correctos. Nuevo repo independiente id1360702988 creado privado y vacio; original id1350942338 renombrado y mantenido privado. Falta push, comprobar referencias remotas, publicar y habilitar protecciones.
+- DONE 2026-09-07: publicacion source-only autorizada desde Galerazo web, codigo56035d4. Nueve commits limpios publicados en repo nuevo independiente con URL original (id1360702988), PUBLIC y ambas protecciones de secretos enabled. Remoto original id1350942338 permanece PRIVATE bajo gemidos-premium-private-archive; no es un fork. Backup completo en artifacts/publication-backup/before-public.bundle y audios en esa carpeta; ambos recursos restaurados en res/raw e ignorados, hashes intactos. Version0.1.1/build2 para controles de fuentes publicas, experiencia sin cambios ni APK. HTTP anonimo repo200, archivo privado404, audios actuales y hash de commit antiguo404. No hubo push forzado al archivo: se conservo todo su historial privado.
+- Verificado localmente sin audios: 14 tests del plan + 2 controles de fuente publica,18 pruebas Android y JaCoCo100% (796 instrucciones,38 ramas,153 lineas,22 metodos),Lint correcto. Ensamblado dry-run sin audios y test dry-run con un solo audio rechazados con mensaje esperado. Con originales restaurados: contratos/plan/acustica300ventanas/cobertura/Lint correctos. Gitleaks en historial y staged sin hallazgos. CI se omite con [skip ci] tras validar localmente; no se monitoreo. No hay trabajo pendiente de esta publicacion.
 
 Icono corregido y validado; no quedan tareas de implementacion activas. La correccion aparecera al generar/instalar la proxima APK desde Apps Dashboard. El pedido anterior de sonidos esta terminado en este proyecto y fue enviado a `Diseña Linterna Premium` para implementacion independiente.
 
 ## Estado actual
 
 - Memoria persistente inicializada y reconciliada con el proyecto real.
-- Rama primaria `main`; remoto privado `https://github.com/ldebortoli/gemidos-premium.git`.
+- Rama primaria `main`; remoto publico source-only `https://github.com/ldebortoli/gemidos-premium.git`.
 - Android nativo Kotlin/Compose con paquete `com.gemidospremium.app`, version 0.1.1 / build2 y variantes `demo`/`play`.
 - Icono: boca y ambas ondas reducidas uniformemente al 70 %, traslacion -3/-1 sobre pivote 54/54. Radio visible medido 27,49 dp, dentro del circulo seguro de 33 dp; antes llegaba a 43,57 dp y la onda exterior se recortaba. Legacy/adaptativo y splash comparten el mismo vector. Comparacion local revisada en `artifacts/launcher-icon-comparison.png` y vista corregida en `artifacts/launcher-icon-fixed.png` (ignoradas por Git).
 - La cuenta regresiva 10 a 0 inicia al entrar; al llegar a cero el reproductor local solicita foco transitorio y eleva temporalmente el canal multimedia al maximo permitido.
@@ -37,7 +37,7 @@ Icono corregido y validado; no quedan tareas de implementacion activas. La corre
 
 1. Cuando el usuario lo pida, generar `demoRelease` desde Apps Dashboard y probar volumen, restauracion, ciclo de vida y botones en un telefono Android real.
 2. Antes de publicar, configurar producto `premium_silence_pack`, AdMob/UMP, firma de produccion, politica de privacidad, Data safety y clasificacion de contenido.
-3. Activar Secret Scanning/Push Protection si el plan o tipo del repositorio pasa a soportarlo.
+3. Mantener Secret Scanning/Push Protection activos en el repo publico y no volver a publicar historiales o audios del archivo privado.
 
 ## Riesgos
 
