@@ -1,5 +1,11 @@
 # Session handoff
 
+## Ruta a Google Play · 2026-09-29
+
+- `docs/PLAN_PUBLICACION_PLAY.md` detalla alta única de Play Console para las dos apps, pagos, producto `premium_silence_pack`, AdMob, `app-ads.txt`, firma, AAB, pruebas y solicitud de producción. La cuenta personal nueva requiere 12 testers adheridos durante 14 días por app.
+- La publicación comercial sigue bloqueada por falta de derecho documentado para el audio principal y por riesgo de rechazo de contenido sexual en Google Play. La clasificación etaria no elimina esa política. Se requiere permiso suficiente o reemplazo y revisión del contenido antes de subir audios a Play.
+- `playRelease` no configura aún una clave de subida de producción. Los audios locales y el APK demo no son una entrega publicable. No se generó APK/AAB ni se cambió el comportamiento o la versión.
+
 ## Estado actual · 2026-09-07
 
 - Version0.1.1/build2; codigo56035d4, actualizaciones de memoria posteriores.
