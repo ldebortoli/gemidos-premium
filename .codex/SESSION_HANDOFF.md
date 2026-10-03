@@ -1,63 +1,10 @@
-## Trabajo activo 2026-10-03
+# Session handoff · 2026-10-03 · Gemidos PREMIUM
 
-- Historial de novedades por versión/build, publicación automática como respuestas al APK confirmado y cadena si supera Telegram. Central Apps Dashboard cubre las cinco apps; los productos móviles no cambian por documentación. Revisar tickets actuales y validar alcance antes de cerrar completos.
-
-# Session handoff
-
-## Ruta a Google Play · 2026-09-29
-
-- `docs/PLAN_PUBLICACION_PLAY.md` detalla alta única de Play Console para las dos apps, pagos, producto `premium_silence_pack`, AdMob, `app-ads.txt`, firma, AAB, pruebas y solicitud de producción. La cuenta personal nueva requiere 12 testers adheridos durante 14 días por app.
-- La publicación comercial sigue bloqueada por falta de derecho documentado para el audio principal y por riesgo de rechazo de contenido sexual en Google Play. La clasificación etaria no elimina esa política. Se requiere permiso suficiente o reemplazo y revisión del contenido antes de subir audios a Play.
-- `playRelease` no configura aún una clave de subida de producción. Los audios locales y el APK demo no son una entrega publicable. No se generó APK/AAB ni se cambió el comportamiento o la versión.
-
-## Estado actual · 2026-09-07
-
-- Version0.1.1/build2; codigo56035d4, actualizaciones de memoria posteriores.
-- Main/origin https://github.com/ldebortoli/gemidos-premium.git PUBLIC,
-  repositorio independiente id1360702988. Secret Scanning y Push Protection
-  habilitados y verificados; autor noreply.
-- El propietario autorizo retirar audios/rutas personales de todo el historial,
-  conservar recursos locales, renombrar el remoto original privado y publicar
-  un repositorio nuevo con nombre/URL originales. D-018.
-- Los nueve commits originales se filtraron antes del primer push al repo nuevo.
-  Original remoto id1350942338 sigue PRIVATE como gemidos-premium-private-archive;
-  no es un fork ni se abrio ese archivo al publico.
-- Respaldo completo verificado: artifacts/publication-backup/before-public.bundle.
-  Ambos audios tambien respaldados ahi y restaurados en res/raw con hashes
-  originales. Todo ese material es local/ignorado: NO versionarlo ni publicarlo.
-- No mezclar otros clones del historial antiguo con main: usar un clon nuevo o
-  migrar solo cambios de codigo revisados. No restaurar remotos/ref de respaldo.
-- Repo publico200 sin sesion; archivo privado404; audios en main y commit
-  antiguo404. Gitleaks del historial y diff sin hallazgos.
-
-## Validacion y contrato source-only
-
-- Sin audios: npm test (14 tests del plan +2 guardas),18 pruebas Android,
-  coverage100% y Lint correctos. Gradle permite solo cuatro tareas explicitas
-  de calidad, con identificadores .txt no reproducibles exclusivos de tests.
-- Build instalable sin audios y calidad con solo uno de los dos audios:
-  rechazo temprano verificado con dry-run. No generar una APK con esos stubs.
-- Con originales restaurados: contratos, plan, acustica300ventanas,
-  cobertura y Lint aprobados; hashes de ambos recursos intactos.
-- JaCoCo dominio:796 instrucciones,38 ramas,153 lineas,22 metodos, todos100%;
-  plan sonoro100% lineas/ramas/funciones. Umbrales100% preservados.
-- Sin APK nueva, sin prueba de reproduccion en dispositivo, pagos o anuncios
-  reales. CI no monitoreada; pushes [skip ci] luego de verificar localmente.
-- Source-only y restauracion local documentados en docs/PUBLIC_SOURCE.md.
-  README/version.properties/manifest/paquetes/lockfiles sincronizados.
-- .gitattributes conserva LF y CRLF para .bat; gradlew ejecutable100755.
-- El codigo de reproduccion, idiomas, UI e identidad aprobados no cambio.
-
-## Continuidad de la aplicacion
-
-- Android Kotlin/Compose, com.gemidospremium.app, variantes demo/play. Audio
-  empieza tras cuenta regresiva10; apagado gratuito inmediato y restauracion
-  de volumen/foco al salir. Premium silencia en1.5s y celebra15s sin retener ruido.
-- Audio local principal9.863s en loop y celebracion14.998s continua; licencia,
-  hashes y generador en docs/AUDIO_LICENSE.md. No redistribuir las grabaciones.
-- Apps Dashboard usa la misma carpeta local; demoRelease requiere el keystore
-  QA estable via APPS_DASHBOARD_ANDROID_TEST_KEYSTORE_PATH.
-- Antes de distribucion comercial: confirmar derechos/clasificacion del audio,
-  condiciones Mixkit, Play Console/Billing, AdMob/UMP, firma y politica publica.
-- USER_QUEUE vacia. Sin trabajo pendiente de esta publicacion. No generar APK
-  hasta que el usuario la pida; no reabrir el antiguo archivo privado.
+- Pedido de novedades automáticas por APK completado. RELEASE_NOTES.json en raíz documenta 0.1.1/build2, notas publicadas en541a1fa. Cada próxima iteración debe agregar versión/build con cambios revisados y conservar historial. Documentación sin cambiar app/versión/build/distributable.
+- Publicador central Apps Dashboard0.2.16/625de98 cubre los cinco perfiles: confirmar archivo y enviar texto en respuesta al APK; continuaciones en cadena cuando excede4096UTF-16, Unicode conservado, progreso persistido y reintento de sólo partes pendientes. Notas acumuladas por app/chat/target y versión anunciada sólo tras confirmación completa. Una respuesta HTTP perdida puede dejar envío ambiguo; revisar canal antes de repetir. Regla global permanente para futuros proyectos/envíos autorizados.
+- Esta app mantiene Codex Logs y menciona sólo@galerazo34, nunca Nico. No se generó ni compartió APK nuevo, ni se enviaron novedades de esta app durante la entrega. Sí se verificaron respuestas de las tres apps Nico: APK60→63,Tivio;61→64,Altura;62→65,En la misma, con identidad exacta Codex Bot/admin y sin repetir archivos. Helpers/Bot API cerrados.
+- GitHub de esta app sin issues nuevos/abiertos. Tivio/backend/landing y tres proyectosNico también revisados; no novedades ejecutables. PerfilAltura#1 comentado/cerrado completed, tableroDone; #2 y retests físicosTivio siguen bloqueados. No cierres parciales.
+- Validación local documental: JSON/schema/appId/versión/build cotejados con app.json mediante planner central; formatter desde índice autocrlf=true pasa. npm test de contratos/identidad/versiones correcto. Dashboard228/228/100% Node tres métricas; Tivio574,Altura175,Enlamisma233+PostGIS y100% cuatro métricas en sus scopes. Umbrales/alcances intactos; no nueva validación Android física/Kotlin/lector para esta documentación.
+- Dominio Android previamente18pruebas/100% instrucciones/ramas/líneas/complejidad/métodos/clases; sin nuevo cambio Kotlin ni suite pesada. Fuente pública source-only, original privado gemidos-premium-private-archive preservado; no mezclar clones/historial ni publicar/restaurar grabaciones. Audio local original/celebración permanecen ignorados/verificados; builds sin ambos fallan. Publicación comercial bloqueada por derechos insuficientes documentados/riesgo de rechazo contenido sexual, firma/IDs de producción y decisiones del propietario; docs/PLAN_PUBLICACION_PLAY.md y docs/PUBLIC_SOURCE.md.
+- Main/origin público personal bajo ldebortoli, fuente-only/noreply. Secret Scanning y Push Protection enabled verificados por API03/10; no cambios de preferencia de cuenta ni plan. No CI remoto monitoreado, fuentes/assets/credenciales/settings existentes preservados.
+- USER_QUEUE vacío, pedido directo DONE y ningún derivado nuevo pendiente. Windows captura/control SetIsBorderRequired/0x80004002 incompatible sigue deshabilitado; browser/DOM/API/CLI como fallback. Ningún proceso QA propio ni servicio nuevo; no apagar/reiniciar servicios ajenos.

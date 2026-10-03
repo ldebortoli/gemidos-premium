@@ -6,11 +6,11 @@
 
 # IN PROGRESS
 
-- [P1] [2026-10-03] IN PROGRESS: historial RELEASE_NOTES por versión/build para respuestas automáticas a APK de Apps Dashboard; revisar tickets vigentes y registrar bloqueos sin cerrar parciales.
-
 No hay tareas en curso.
 
 # DONE
+
+- [2026-10-03] Documentar RELEASE_NOTES.json por versión/build y conectar las cinco apps al publicador central Apps Dashboard 0.2.16 (625de98): archivo confirmado, texto respondiendo al APK y continuación en cadena, cortes Unicode <=4096, acumulación por app/chat/target y progreso persistido para reanudar sin duplicar APK/partes confirmadas. Regla global guardada. Nuevas notas reales verificadas por Codex Bot/admin: Tivio0.21.3/30 APK60→texto63, A la Altura0.9.4/25 APK61→texto64, En la misma0.1.5/6 APK62→texto65; sin nuevos APKs. 228/228 Dashboard,100% líneas/ramas/funciones; Tivio574/574, Altura175/175, En la misma233/233+PostGIS,100% cuatro métricas en sus alcances, gates intactos. Linterna/Gemidos: notas de futuros envíos y npm test de contratos/versiones, sin mensajes nuevos ni cambiar producto. Formatter de índice LF/autocrlf=true y shortcut/DOM/AppUserModelID/cierre correctos, helpers/Bot API/QA DB cerrados. No hay tickets nuevos: perfil Altura #1 comentado5971788617 y closed/completed con tablero Done; #2 y retests Tivio#174–#177 siguen bloqueados. Cola sin pendientes nuevos ejecutables; Git source-only publicado, CI no monitoreada.
 
 - [2026-09-29] Revisar requisitos vigentes de Play Console, cobros, AdMob y publicación de Gemidos PREMIUM; documentar el orden y los bloqueos de derechos de audio/contenido en `docs/PLAN_PUBLICACION_PLAY.md`. Sin cambio de aplicación ni APK.
 - [2026-09-07] Publicado Gemidos Premium source-only 0.1.1 / build2, codigo56035d4: nueve commits saneados antes de publicar en un repositorio independiente con URL original. Original remoto preservado privado como gemidos-premium-private-archive y bundle/audio local respaldado. Ambos recursos locales restaurados con hashes intactos e ignorados. Sin grabaciones/rutas personales en historial publico; repo nuevo200, archivo privado y audio actual/commit anterior404 sin sesion. Secret Scanning y Push Protection habilitados/verificados. 16 pruebas Node,18 Android, coberturas100% del plan/dominio, Lint y acustica300ventanas correctos con originales; calidad source-only sin audios tambien aprobada y builds/pares incompletos rechazados. Sin APK, pagos, nuevos servicios ni seguimiento CI.
