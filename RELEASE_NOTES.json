@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "appId": "gemidos-premium",
+  "releases": [
+    {
+      "version": "0.1.1",
+      "build": "2",
+      "changes": [
+        "Preparar la publicación del código fuente sin grabaciones: separar los audios privados y exigir sus originales verificados para cualquier build instalable.",
+        "Conservar la cuenta regresiva de 10 segundos, audio en loop, apagado plebeyo inmediato y restauración del volumen y foco al salir o detener la reproducción.",
+        "Mantener la celebración Premium de 15 segundos con los siete efectos aprobados completos y transiciones solapadas sin pausas; el audio principal se silencia en 1,5 segundos.",
+        "Conservar el icono de boca y ondas dentro de la zona segura y las traducciones y controles de la app.",
+        "Límite: versión de prueba privada; la distribución comercial depende de derechos suficientes sobre el audio, revisión del contenido y configuración de firma, tiendas, cobros y anuncios reales."
+      ]
+    }
+  ]
+}

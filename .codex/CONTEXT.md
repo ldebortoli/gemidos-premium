@@ -46,3 +46,9 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - La app restaura el volumen multimedia previo y libera el foco de audio al apagar, perder foco, salir o cerrarse.
 - Los sonidos suplementarios de la celebracion nunca deben impedir ni retrasar el restaurado del audio principal.
 - Los archivos de texto versionados se normalizan a LF mediante `.gitattributes`; scripts batch conservan CRLF y los recursos binarios se marcan explicitamente.
+
+## Novedades de APK · regla 2026-10-03
+
+- RELEASE_NOTES.json en la raíz conserva cambios revisados por versión/build y prefijo de artefactos. Apps Dashboard central publica esas notas después de confirmar cada archivo, como respuesta al APK y continuaciones en cadena cuando superan el límite de Telegram; incluye versiones no anunciadas para esa app/chat/plataforma.
+- Codex Bot verifica identidad, destino, permisos, archivo y cada respuesta. Credenciales cifradas; recibos y progreso locales fuera de Git; reintentos continúan partes pendientes sin repetir el APK. Sólo avanzar la versión anunciada al confirmar la cadena completa. El transporte no garantiza exactamente una vez si se pierde la respuesta HTTP después de la aceptación remota.
+- Preparar una entrada por cada nueva iteración distribuible y mantener el historial. Esta documentación no cambia el comportamiento ni versión del producto móvil; el cambio de publicador se entrega en Apps Dashboard 0.2.16.

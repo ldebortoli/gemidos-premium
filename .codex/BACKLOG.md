@@ -1,10 +1,12 @@
-﻿# TODO
+# TODO
 
 - [P1] Configurar Play Console, producto Premium, AdMob, politica publica y pruebas en telefono real antes de una publicacion comercial.
 - [P2] Revisar el contenido y la clasificacion etaria exigida por Google Play antes de distribuir fuera de un grupo privado de pruebas.
 - [P2] Antes de distribuir fuera de pruebas privadas, confirmar compatibilidad del contenido sugestivo con las condiciones de uso aceptable de Mixkit/Envato para los nuevos efectos; no asumir que una licencia gratuita carece de restricciones de uso.
 
 # IN PROGRESS
+
+- [P1] [2026-10-03] IN PROGRESS: historial RELEASE_NOTES por versión/build para respuestas automáticas a APK de Apps Dashboard; revisar tickets vigentes y registrar bloqueos sin cerrar parciales.
 
 No hay tareas en curso.
 
