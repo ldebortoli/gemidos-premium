@@ -45,7 +45,9 @@ if (errors.length === 0) {
   const premiumAudio = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/platform/AndroidPremiumCelebrationAudio.kt");
   const premiumAudioGenerator = read("tools/generate-premium-celebration.ps1");
   const screen = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/ui/GemidosPremiumScreen.kt");
-  const localization = read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt");
+  const localization =
+    read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/GemidosLocalization.kt") +
+    read("apps/mobile/android/app/src/main/java/com/gemidospremium/app/localization/AppLanguage.kt");
   const manifest = read("apps/mobile/android/app/src/main/AndroidManifest.xml");
   const gradle = read("apps/mobile/android/app/build.gradle.kts");
   const ciWorkflow = read(".github/workflows/ci.yml");

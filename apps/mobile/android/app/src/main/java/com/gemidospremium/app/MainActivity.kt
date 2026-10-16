@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -75,26 +78,30 @@ class MainActivity : ComponentActivity(), BillingEvents {
         }
 
         setContent {
-            GemidosPremiumTheme {
-                GemidosPremiumScreen(
-                    state = uiState,
-                    text = currentText,
-                    selectedLanguage = selectedLanguage,
-                    adsReady = adsReady,
-                    adUnitId = BuildConfig.ADMOB_BANNER_ID,
-                    isDemo = BuildConfig.DEMO_BILLING,
-                    onCountdownTick = { applyResult(engine.tickCountdown()) },
-                    onRestart = ::restartCountdown,
-                    onPremium = { applyResult(engine.pressPremium()) },
-                    onNormalOff = {
-                        premiumCelebrationAudio.stop()
-                        applyResult(engine.turnOffNormally())
-                    },
-                    onConfirmPurchase = { applyResult(engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING)) },
-                    onDismissPurchase = { uiState = engine.dismissPurchase() },
-                    onResetDemoPremium = ::resetDemoPremium,
-                    onLanguageSelected = ::selectLanguage,
-                )
+            CompositionLocalProvider(
+                LocalLayoutDirection provides if (selectedLanguage.isRightToLeft) LayoutDirection.Rtl else LayoutDirection.Ltr,
+            ) {
+                GemidosPremiumTheme {
+                    GemidosPremiumScreen(
+                        state = uiState,
+                        text = currentText,
+                        selectedLanguage = selectedLanguage,
+                        adsReady = adsReady,
+                        adUnitId = BuildConfig.ADMOB_BANNER_ID,
+                        isDemo = BuildConfig.DEMO_BILLING,
+                        onCountdownTick = { applyResult(engine.tickCountdown()) },
+                        onRestart = ::restartCountdown,
+                        onPremium = { applyResult(engine.pressPremium()) },
+                        onNormalOff = {
+                            premiumCelebrationAudio.stop()
+                            applyResult(engine.turnOffNormally())
+                        },
+                        onConfirmPurchase = { applyResult(engine.confirmPremiumPurchase(BuildConfig.DEMO_BILLING)) },
+                        onDismissPurchase = { uiState = engine.dismissPurchase() },
+                        onResetDemoPremium = ::resetDemoPremium,
+                        onLanguageSelected = ::selectLanguage,
+                    )
+                }
             }
         }
 

@@ -7,7 +7,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Estado detectado
 
 - Ruta: `<project-root>`
-- Version: `0.1.1` (`versionCode` 2).
+- Version: `0.1.2` (`versionCode` 3).
 - Stack: Android nativo sobre Android 16 / API 36, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
 - Git: repositorio publico source-only `ldebortoli/gemidos-premium`, independiente del original privado preservado como gemidos-premium-private-archive.
 - Rama primaria: `main`.
@@ -52,3 +52,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - RELEASE_NOTES.json en la raíz conserva cambios revisados por versión/build y prefijo de artefactos. Apps Dashboard central publica esas notas después de confirmar cada archivo, como respuesta al APK y continuaciones en cadena cuando superan el límite de Telegram; incluye versiones no anunciadas para esa app/chat/plataforma.
 - Codex Bot verifica identidad, destino, permisos, archivo y cada respuesta. Credenciales cifradas; recibos y progreso locales fuera de Git; reintentos continúan partes pendientes sin repetir el APK. Sólo avanzar la versión anunciada al confirmar la cadena completa. El transporte no garantiza exactamente una vez si se pierde la respuesta HTTP después de la aceptación remota.
 - Preparar una entrada por cada nueva iteración distribuible y mantener el historial. Esta documentación no cambia el comportamiento ni versión del producto móvil; el cambio de publicador se entrega en Apps Dashboard 0.2.16.
+
+- Idiomas desde 0.1.2: 250 opciones persistentes, 21 previas conservadas y 229 catálogos automáticos nuevos, con dirección RTL por selección. Inventario portable en docs/LANGUAGE_INVENTORY.json; no hay revisión nativa afirmada ni fallback de cadenas. jam bloqueado por fragmentos fuente.
+
+- Validación desde ampliación 2026-10-16: 24 pruebas JVM Android sin omitidas; 100% de seis métricas JaCoCo en dominio/modelos/contratos/localización pura, con exclusiones explícitas del adaptador Android SharedPreferences y puentes Kotlin generados. Lint correcto. Catálogos y procedencia/hashes se controlan también desde npm test.

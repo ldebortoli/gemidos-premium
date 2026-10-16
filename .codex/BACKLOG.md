@@ -1,12 +1,16 @@
 # TODO
 
+- [P1] [BLOCKED: AVD API36 y API33 arrancan con ANR de com.android.systemui; API36 devuelve Activity Status: timeout, mCurrentFocus=null y UiTestAutomationBridge null root. Sin dispositivo físico conectado ni harness Android operativo; no repetir sin reparación o pedido explícito de retest.] Completar matriz visual/accesibilidad/RTL/insets/teclado de las 250 opciones; 0/10 casos representativos aprobados por app.
+
 - [P1] Configurar Play Console, producto Premium, AdMob, politica publica y pruebas en telefono real antes de una publicacion comercial.
 - [P2] Revisar el contenido y la clasificacion etaria exigida por Google Play antes de distribuir fuera de un grupo privado de pruebas.
 - [P2] Antes de distribuir fuera de pruebas privadas, confirmar compatibilidad del contenido sugestivo con las condiciones de uso aceptable de Mixkit/Envato para los nuevos efectos; no asumir que una licencia gratuita carece de restricciones de uso.
 
 # IN PROGRESS
 
-No hay tareas en curso.
+- [P1] Ampliación global de idiomas 2026-10-16: inventario con fuentes, catálogos completos sin fallback, preservación de 21 opciones; validar, incrementar versión/build una vez, commit/push y APK demoRelease a Codex Logs con notas y recibos.
+
+
 
 # DONE
 

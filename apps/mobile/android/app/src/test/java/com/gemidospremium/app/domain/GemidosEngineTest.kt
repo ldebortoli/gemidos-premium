@@ -2,6 +2,7 @@ package com.gemidospremium.app.domain
 
 import com.gemidospremium.app.localization.AppLanguage
 import com.gemidospremium.app.localization.GemidosTextCatalog
+import com.gemidospremium.app.model.AudioResult
 import com.gemidospremium.app.model.ErrorTarget
 import com.gemidospremium.app.model.GemidosEffect
 import com.gemidospremium.app.model.PrankPhase
@@ -183,6 +184,17 @@ class GemidosEngineTest {
         assertNull(changed.notice)
         assertNull(changed.error)
         assertNull(changed.errorTarget)
+    }
+
+    @Test
+    fun `an audio port failure retains its message and permits restarting the countdown`() {
+        val engine = playingEngine()
+        val failure = AudioResult.Failure("Audio output disconnected")
+        val failed = engine.audioFailed(failure.message)
+        assertEquals("Audio output disconnected", failed.error)
+        assertEquals(ErrorTarget.AUDIO, failed.errorTarget)
+        assertEquals(PrankPhase.ERROR, failed.phase)
+        assertEquals(10, engine.restartCountdown().countdown)
     }
 
     private fun playingEngine(

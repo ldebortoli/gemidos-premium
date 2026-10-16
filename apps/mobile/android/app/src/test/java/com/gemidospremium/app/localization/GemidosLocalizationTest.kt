@@ -14,7 +14,7 @@ class GemidosLocalizationTest {
                 "zh-Hans", "zh-Hant", "pt-BR", "pt-PT", "ca", "eu", "gn", "quz",
                 "cmn-Hans", "yue-Hant", "ko",
             ),
-            GemidosTextCatalog.supportedLanguages.map(AppLanguage::code),
+            GemidosTextCatalog.supportedLanguages.take(21).map(AppLanguage::code),
         )
         assertEquals(
             GemidosTextCatalog.supportedLanguages.size,
@@ -69,5 +69,57 @@ class GemidosLocalizationTest {
         assertTrue(GemidosTextCatalog.forLanguage(AppLanguage.GUARANI)[TextKey.TURN_ON].contains("papapy"))
         assertTrue(GemidosTextCatalog.forLanguage(AppLanguage.QUECHUA)[TextKey.TURN_ON].contains("Yupay"))
         assertTrue(GemidosTextCatalog.forLanguage(AppLanguage.LATIN)[TextKey.TURN_ON].contains("Numerationem"))
+    }
+    @Test
+    fun `global country and community languages resolve to complete independent catalogs`() {
+        listOf("ar", "ay", "af", "fi", "hi", "uk").forEach { code ->
+            val language = AppLanguage.fromCode(code)
+            assertEquals(code, language.code)
+            val text = GemidosTextCatalog.forLanguage(language)
+            assertEquals(language, text.language)
+            TextKey.entries.forEach { key -> assertTrue("$code/$key", text[key].isNotBlank()) }
+        }
+    }
+    @Test
+    fun `all frozen catalog entries are nonblank and language selection preserves identity`() {
+        assertEquals(250, AppLanguage.entries.size)
+        AppLanguage.entries.forEach { language ->
+            assertEquals(language, AppLanguage.fromCode(language.code))
+            val text = GemidosTextCatalog.forLanguage(language)
+            assertEquals(language, text.language)
+            TextKey.entries.forEach { key -> assertTrue("${language.code}/$key", text[key].isNotBlank()) }
+        }
+        assertTrue(AppLanguage.fromCode("ar").isRightToLeft)
+        assertTrue(AppLanguage.fromCode("he").isRightToLeft)
+        assertTrue(!AppLanguage.ENGLISH.isRightToLeft)
+    }
+
+    @Test
+    fun `region script and unknown language boundaries preserve deterministic resolution`() {
+        assertEquals(AppLanguage.SPANISH_ARGENTINA, AppLanguage.fromCode("es"))
+        assertEquals(AppLanguage.CHINESE_TRADITIONAL, AppLanguage.fromCode("zh-Hant-CN"))
+        assertEquals(AppLanguage.CHINESE_TRADITIONAL, AppLanguage.fromCode("zh-TW-extra"))
+        assertEquals(AppLanguage.CHINESE_TRADITIONAL, AppLanguage.fromCode("zh-HK"))
+        assertEquals(AppLanguage.CHINESE_TRADITIONAL, AppLanguage.fromCode("zh-MO"))
+        assertEquals(AppLanguage.CHINESE_SIMPLIFIED, AppLanguage.fromCode("zh-CN"))
+        assertEquals(AppLanguage.MANDARIN, AppLanguage.fromCode("cmn-Hans-CN"))
+        assertEquals(AppLanguage.CANTONESE, AppLanguage.fromCode("yue-HK"))
+        assertEquals(AppLanguage.FRENCH, AppLanguage.fromCode("fr-CH"))
+        assertEquals(AppLanguage.SPANISH_ARGENTINA, AppLanguage.fromCode(""))
+        assertEquals(AppLanguage.SPANISH_ARGENTINA, AppLanguage.fromCode(null))
+    }
+
+    @Test
+    fun `incomplete or blank catalogs fail before being exposed`() {
+        assertEquals("Volver", translationCatalog(listOf(TextKey.BACK), "Volver").getValue(TextKey.BACK))
+        assertTrue(translationCatalog(emptyList()).isEmpty())
+        listOf(emptyArray<String>(), arrayOf("one", "two"), arrayOf(" ")).forEach { values ->
+            try {
+                translationCatalog(listOf(TextKey.BACK), *values)
+                throw AssertionError("Invalid catalog accepted")
+            } catch (_: IllegalArgumentException) {
+                // Missing, surplus and blank translations are rejected.
+            }
+        }
     }
 }
