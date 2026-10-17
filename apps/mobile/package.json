@@ -1,6 +1,6 @@
 {
   "name": "gemidos-premium-mobile",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "description": "Comandos portables para la aplicacion Android nativa.",
   "scripts": {

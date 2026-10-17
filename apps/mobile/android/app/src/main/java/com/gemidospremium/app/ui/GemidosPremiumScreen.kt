@@ -10,7 +10,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -28,7 +32,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -44,6 +47,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -51,12 +55,18 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.gemidospremium.app.localization.AppLanguage
 import com.gemidospremium.app.localization.GemidosText
 import com.gemidospremium.app.localization.GemidosTextCatalog
@@ -127,63 +137,79 @@ fun GemidosPremiumScreen(
         Scaffold(
             containerColor = Color.Transparent,
             bottomBar = {
-                if (adsReady && !state.isPremiumOwned && adUnitId.isNotBlank()) {
-                    GemidosAdBanner(
-                        adUnitId = adUnitId,
-                        isDemo = isDemo,
-                        testAdLabel = text[TextKey.TEST_AD],
-                        modifier = Modifier.navigationBarsPadding(),
-                    )
+                Column(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                        .windowInsetsPadding(
+                            WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom),
+                        ),
+                ) {
+                    if (state.phase == PrankPhase.PLAYING ||
+                        state.phase == PrankPhase.PREMIUM_SILENCING || celebrationVisible
+                    ) {
+                        FreeStopBar(
+                            text = text,
+                            errorMessage = state.error.takeIf { state.errorTarget == ErrorTarget.NORMAL },
+                            onStop = onNormalOff,
+                        )
+                    }
+                    if (adsReady && !state.isPremiumOwned && adUnitId.isNotBlank()) {
+                        GemidosAdBanner(
+                            adUnitId = adUnitId,
+                            isDemo = isDemo,
+                            testAdLabel = text[TextKey.TEST_AD],
+                        )
+                    }
                 }
             },
         ) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 22.dp, vertical = 18.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                AppHeader(state.isPremiumOwned, text)
-                LanguageSelector(text, selectedLanguage, onLanguageSelected)
-                Spacer(Modifier.height(18.dp))
-                AudioHero(state, text)
-                Spacer(Modifier.height(22.dp))
+            Box(Modifier.fillMaxSize().padding(innerPadding)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 22.dp, vertical = 18.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    AppHeader(state.isPremiumOwned, text)
+                    LanguageSelector(text, selectedLanguage, onLanguageSelected)
+                    Spacer(Modifier.height(18.dp))
+                    AudioHero(state, text)
+                    Spacer(Modifier.height(22.dp))
 
-                AnimatedContent(targetState = state.phase, label = "estado-gemidos") { phase ->
-                    when (phase) {
-                        PrankPhase.PLAYING -> PlayingActions(
-                            state = state,
-                            text = text,
-                            onPremium = onPremium,
-                            onNormalOff = onNormalOff,
-                        )
+                    AnimatedContent(targetState = state.phase, label = "estado-gemidos") { phase ->
+                        when (phase) {
+                            PrankPhase.PLAYING -> PlayingActions(
+                                state = state,
+                                text = text,
+                                onPremium = onPremium,
+                            )
 
-                        PrankPhase.SILENCED,
-                        PrankPhase.ERROR -> IdleActions(
-                            state = state,
-                            text = text,
-                            isDemo = isDemo,
-                            onRestart = onRestart,
-                            onResetDemoPremium = onResetDemoPremium,
-                        )
+                            PrankPhase.SILENCED,
+                            PrankPhase.ERROR -> IdleActions(
+                                state = state,
+                                text = text,
+                                isDemo = isDemo,
+                                onRestart = onRestart,
+                                onResetDemoPremium = onResetDemoPremium,
+                            )
 
-                        PrankPhase.COUNTDOWN,
-                        PrankPhase.PREMIUM_SILENCING -> Unit
+                            PrankPhase.COUNTDOWN,
+                            PrankPhase.PREMIUM_SILENCING -> Unit
+                        }
                     }
+                    Spacer(Modifier.height(18.dp))
                 }
-                Spacer(Modifier.height(18.dp))
-            }
-        }
 
-        if (celebrationVisible) {
-            PremiumDopamineOverlay(
-                progress = celebration.value,
-                celebrationText = text[TextKey.PREMIUM_OFF_NOTICE],
-                contentDescription = text[TextKey.FIREWORKS_A11Y],
-                modifier = Modifier.matchParentSize(),
-            )
+                if (celebrationVisible) {
+                    PremiumDopamineOverlay(
+                        progress = celebration.value,
+                        celebrationText = text[TextKey.PREMIUM_OFF_NOTICE],
+                        contentDescription = text[TextKey.FIREWORKS_A11Y],
+                        modifier = Modifier.matchParentSize().clipToBounds(),
+                    )
+                }
+            }
         }
     }
 
@@ -195,6 +221,30 @@ fun GemidosPremiumScreen(
             onConfirm = onConfirmPurchase,
             onDismiss = onDismissPurchase,
         )
+    }
+}
+
+@Composable
+private fun FreeStopBar(text: GemidosText, errorMessage: String?, onStop: () -> Unit) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            errorMessage?.let { ActionError(it) }
+            TextButton(onClick = onStop, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
+                Text(
+                    text = text[TextKey.NORMAL_PLEBEIAN_OFF],
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center,
+                )
+            }
+        }
     }
 }
 
@@ -265,6 +315,7 @@ private fun LanguageSelector(
             ) {
                 GemidosTextCatalog.supportedLanguages.forEach { language ->
                     DropdownMenuItem(
+                        modifier = Modifier.semantics { selected = language == selectedLanguage },
                         text = {
                             Text(if (language == selectedLanguage) "✓ ${language.nativeLabel}" else language.nativeLabel)
                         },
@@ -393,7 +444,6 @@ private fun PlayingActions(
     state: GemidosState,
     text: GemidosText,
     onPremium: () -> Unit,
-    onNormalOff: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         state.error
@@ -403,7 +453,7 @@ private fun PlayingActions(
             onClick = onPremium,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(112.dp),
+                .heightIn(min = 112.dp),
             shape = RoundedCornerShape(24.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = PremiumGold,
@@ -424,22 +474,6 @@ private fun PlayingActions(
                 )
             }
         }
-        Spacer(Modifier.height(14.dp))
-        state.error
-            ?.takeIf { state.errorTarget == ErrorTarget.NORMAL }
-            ?.let { ActionError(it) }
-        Text(
-            text = text[TextKey.NORMAL_PLEBEIAN_OFF],
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = 48.dp)
-                .clickable(onClick = onNormalOff)
-                .padding(vertical = 14.dp),
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Center,
-        )
     }
 }
 
@@ -485,35 +519,45 @@ private fun PremiumPurchaseDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
 ) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(text[TextKey.PREMIUM_OFF]) },
-        text = {
-            Column {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+            shape = RoundedCornerShape(28.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        ) {
+            // Scroll the whole confirmation so large text cannot squeeze out disclosures or actions.
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()).padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Text(
+                    text = text[TextKey.PREMIUM_OFF],
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.semantics { heading() },
+                )
                 Text(
                     text = if (isDemo) text[TextKey.LOCAL_TEST] else priceLabel ?: text[TextKey.PRICE_GOOGLE_PLAY],
+                    style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                 )
                 Text(
                     text = text[TextKey.ONE_TIME_NO_SUBSCRIPTION],
-                    modifier = Modifier.padding(top = 4.dp),
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Text(
                     text = if (isDemo) text[TextKey.DEMO_PURCHASE_HELP] else text[TextKey.PLAY_PURCHASE_HELP],
-                    modifier = Modifier.padding(top = 16.dp),
+                    style = MaterialTheme.typography.bodyMedium,
                 )
+                Button(onClick = onConfirm, modifier = Modifier.fillMaxWidth()) {
+                    Text(if (isDemo) text[TextKey.SIMULATE_PURCHASE] else text[TextKey.CONTINUE_PLAY])
+                }
+                TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) {
+                    Text(text[TextKey.NOT_NOW])
+                }
             }
-        },
-        confirmButton = {
-            Button(onClick = onConfirm) {
-                Text(if (isDemo) text[TextKey.SIMULATE_PURCHASE] else text[TextKey.CONTINUE_PLAY])
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text(text[TextKey.NOT_NOW]) }
-        },
-    )
+        }
+    }
 }
 
 @Composable
@@ -567,7 +611,10 @@ private fun PremiumDopamineOverlay(
     val reelStep = (progress * 132).toInt()
 
     Box(
-        modifier = modifier.semantics { this.contentDescription = contentDescription },
+        modifier = modifier.clearAndSetSemantics {
+            this.contentDescription = "$contentDescription. $celebrationText"
+            liveRegion = LiveRegionMode.Polite
+        },
         contentAlignment = Alignment.Center,
     ) {
         Canvas(Modifier.matchParentSize()) {
@@ -678,9 +725,19 @@ private fun PremiumDopamineOverlay(
             tonalElevation = 12.dp,
         ) {
             Column(
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp),
+                modifier = Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                Text(
+                    text = celebrationText,
+                    color = Color.White,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold,
+                    lineHeight = 21.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.widthIn(max = 280.dp),
+                )
+                Spacer(Modifier.height(12.dp))
                 Text(
                     text = "★ PREMIUM ×777 ★",
                     color = PremiumGold,
@@ -712,16 +769,6 @@ private fun PremiumDopamineOverlay(
                     color = colors[reelStep % colors.size],
                     letterSpacing = 5.sp,
                     fontWeight = FontWeight.Black,
-                )
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    text = celebrationText,
-                    color = Color.White,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold,
-                    lineHeight = 21.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.widthIn(max = 280.dp),
                 )
             }
         }

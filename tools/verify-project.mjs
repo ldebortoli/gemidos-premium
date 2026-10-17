@@ -85,7 +85,7 @@ if (errors.length === 0) {
   if (!engine.includes("fun turnOffNormally") || !screen.includes("TextKey.NORMAL_PLEBEIAN_OFF")) {
     errors.push("Falta el apagado plebeyo gratuito e inmediato");
   }
-  if (!screen.includes("height(112.dp)") || !screen.includes("TextKey.PREMIUM_OFF")) {
+  if (!screen.includes("heightIn(min = 112.dp)") || !screen.includes("TextKey.PREMIUM_OFF")) {
     errors.push("Apagado Premium debe ser el boton principal extragrande");
   }
   if (screen.includes("TextKey.MAX_INTENSITY_HELP")) {
@@ -95,9 +95,9 @@ if (errors.length === 0) {
     screen.includes("OutlinedButton(") ||
     !screen.includes("text = text[TextKey.NORMAL_PLEBEIAN_OFF]") ||
     !screen.includes("fontSize = 12.sp") ||
-    !screen.includes(".clickable(onClick = onNormalOff)")
+    !screen.includes("TextButton(onClick = onStop") || !screen.includes("WindowInsets.safeDrawing.only") || !screen.includes("FreeStopBar(")
   ) {
-    errors.push("Apagado plebeyo debe ser texto pequeno tocable, sin superficie de boton");
+    errors.push("Apagado plebeyo debe conservar texto pequeno tocable en una barra segura y siempre accesible");
   }
   if (
     !screen.includes("PremiumDopamineOverlay(") ||

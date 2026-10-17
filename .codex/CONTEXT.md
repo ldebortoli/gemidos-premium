@@ -7,7 +7,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Estado detectado
 
 - Ruta: `<project-root>`
-- Version: `0.1.2` (`versionCode` 3).
+- Version en implementación: `0.1.3` (`versionCode` 4); QA Android en curso, sin nueva distribución.
 - Stack: Android nativo sobre Android 16 / API 36, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
 - Git: repositorio publico source-only `ldebortoli/gemidos-premium`, independiente del original privado preservado como gemidos-premium-private-archive.
 - Rama primaria: `main`.
@@ -57,4 +57,6 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 
 - Validación desde ampliación 2026-10-16: 24 pruebas JVM Android sin omitidas; 100% de seis métricas JaCoCo en dominio/modelos/contratos/localización pura, con exclusiones explícitas del adaptador Android SharedPreferences y puentes Kotlin generados. Lint correcto. Catálogos y procedencia/hashes se controlan también desde npm test.
 
-- Última distribución confirmada en Codex Logs: 0.1.2/3 APK767→notas768. Fuente y audios separados, firma QA estable; UI local bloqueada en ambos AVD por System UI (ver backlog), sin revisión nativa afirmada.
+- Última distribución confirmada en Codex Logs: 0.1.2/3 APK767→notas768. Fuente y audios separados, firma QA estable; la validación Android actual está documentada en docs/VALIDACION_ANDROID.md; sin revisión nativa afirmada.
+
+- QA reproducible: tools/android-qa en AVD aislado Premium_QA_API36 (AOSP API36 rev2,3072MB,2vCPU,SwiftShader), root y ro.hw_timeout_multiplier=3 finito, arranque sin snapshots. Compilar primero y emular después.11 perfiles/33 capturas,15 RTL y TalkBack/teclado por app; cobertura pura100% no equivale a cobertura UI. El AVD Google Play original sigue bloqueado y apartado, configuración restaurada/datos intactos; ambos AVD detenidos al cierre.

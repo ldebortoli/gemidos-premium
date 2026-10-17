@@ -4,7 +4,7 @@ Aplicación Android humorística inspirada en la experiencia de Linterna PREMIUM
 
 La salida gratuita nunca queda bloqueada: **Apagado plebeyo** corta el audio de inmediato. **APAGADO PREMIUM** ofrece una compra única y, cuando está activo, aplica un fade ceremonial de 1,5 segundos que corta y restaura el audio; la celebración visual continúa durante 15 segundos. Al perder foco, cambiar de app o cerrar la actividad, también se libera el foco de audio y se restaura el volumen multimedia anterior.
 
-## Alcance de la versión 0.1.2
+## Alcance de la versión 0.1.3
 
 Repositorio de código público. Los audios privados no se incluyen: ver [cómo validar o compilar desde el código público](docs/PUBLIC_SOURCE.md). La copia local del propietario conserva el audio y el comportamiento existentes.
 
@@ -71,3 +71,7 @@ Los recursos locales y sus hashes se documentan en [`docs/AUDIO_LICENSE.md`](doc
 ## Publicación pendiente
 
 Antes de publicar: configurar Play Console y AdMob, completar Data safety y clasificación de contenido, publicar una política de privacidad final, inyectar IDs/firma de producción y validar audio, restauración de volumen y ciclo de vida en un teléfono Android real.
+
+## Validación Android optativa
+
+La matriz visual, accesible, RTL e insets y los comandos del emulador aislado están en [VALIDACION_ANDROID.md](docs/VALIDACION_ANDROID.md). No se ejecutan automáticamente en CI ni utilizan teléfonos conectados.

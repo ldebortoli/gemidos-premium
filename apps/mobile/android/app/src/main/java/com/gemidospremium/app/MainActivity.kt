@@ -3,6 +3,7 @@ package com.gemidospremium.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -55,7 +56,10 @@ class MainActivity : ComponentActivity(), BillingEvents {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+        )
 
         languageStore = PreferencesLanguageStore(this)
         selectedLanguage = languageStore.current()
@@ -93,6 +97,7 @@ class MainActivity : ComponentActivity(), BillingEvents {
                         onRestart = ::restartCountdown,
                         onPremium = { applyResult(engine.pressPremium()) },
                         onNormalOff = {
+                            premiumSilenceJob?.cancel()
                             premiumCelebrationAudio.stop()
                             applyResult(engine.turnOffNormally())
                         },
