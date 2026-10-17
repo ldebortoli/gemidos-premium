@@ -25,7 +25,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Ejecucion y tests
 
 - Validacion verificada: `npm test`, `npm run test:android`, `npm run coverage` y `npm run lint`.
-- Baseline: 18 pruebas Android, cero fallos, y 100% en instrucciones, ramas, lineas, complejidad, metodos y clases del dominio medido.
+- Baseline: 24 pruebas JVM Android, cero fallos/omitidas y 100% instrucciones/ramas/líneas/métodos/complejidad/clases del núcleo puro (dominio, modelos, contratos y localización).
 - CI fija API 36 y conserva Android Lint estricto; solo `OldTargetApi` esta deshabilitado porque el runner conoce el SDK 37 Preview y elevaba ese aviso ambiental a error.
 - El APK se generara desde Apps Dashboard o solo por pedido explicito; la implementacion ordinaria no inicia Gradle para ensamblar un artefacto.
 - Codigo publicado sin audios: historial filtrado con autorizacion, original remoto conservado privado con otro nombre. Ver D-018 y docs/PUBLIC_SOURCE.md. Tests JVM/cobertura/lint pueden compilar sin grabaciones; builds instalables exigen ambos audios privados. Restaurados y comprobados los hashes originales en la copia local; sin APK nueva.
@@ -56,3 +56,5 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 - Idiomas desde 0.1.2: 250 opciones persistentes, 21 previas conservadas y 229 catálogos automáticos nuevos, con dirección RTL por selección. Inventario portable en docs/LANGUAGE_INVENTORY.json; no hay revisión nativa afirmada ni fallback de cadenas. jam bloqueado por fragmentos fuente.
 
 - Validación desde ampliación 2026-10-16: 24 pruebas JVM Android sin omitidas; 100% de seis métricas JaCoCo en dominio/modelos/contratos/localización pura, con exclusiones explícitas del adaptador Android SharedPreferences y puentes Kotlin generados. Lint correcto. Catálogos y procedencia/hashes se controlan también desde npm test.
+
+- Última distribución confirmada en Codex Logs: 0.1.2/3 APK767→notas768. Fuente y audios separados, firma QA estable; UI local bloqueada en ambos AVD por System UI (ver backlog), sin revisión nativa afirmada.
