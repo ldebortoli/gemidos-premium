@@ -7,7 +7,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Estado detectado
 
 - Ruta: `<project-root>`
-- Version en implementación: `0.1.3` (`versionCode` 4); QA Android en curso, sin nueva distribución.
+- Version de fuente: `0.1.3` (`versionCode` 4); QA AOSP del16/10 completo en su alcance, sin nueva distribución; validación del AVD Google Play original pendiente.
 - Stack: Android nativo sobre Android 16 / API 36, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
 - Git: repositorio publico source-only `ldebortoli/gemidos-premium`, independiente del original privado preservado como gemidos-premium-private-archive.
 - Rama primaria: `main`.
@@ -59,4 +59,4 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 
 - Última distribución confirmada en Codex Logs: 0.1.2/3 APK767→notas768. Fuente y audios separados, firma QA estable; la validación Android actual está documentada en docs/VALIDACION_ANDROID.md; sin revisión nativa afirmada.
 
-- QA reproducible: tools/android-qa en AVD aislado Premium_QA_API36 (AOSP API36 rev2,3072MB,2vCPU,SwiftShader), root y ro.hw_timeout_multiplier=3 finito, arranque sin snapshots. Compilar primero y emular después.11 perfiles/33 capturas,15 RTL y TalkBack/teclado por app; cobertura pura100% no equivale a cobertura UI. El AVD Google Play original sigue bloqueado y apartado, configuración restaurada/datos intactos; ambos AVD detenidos al cierre.
+- QA reproducible: tools/android-qa en AVD aislado Premium_QA_API36 (AOSP API36 rev2,3072MB,2vCPU,SwiftShader), root y ro.hw_timeout_multiplier=3 finito, arranque sin snapshots. Compilar primero y emular después.11 perfiles/33 capturas,15 RTL y TalkBack/teclado por app; cobertura pura100% no equivale a cobertura UI. El AVD Google Play original tiene reparación solicitada, con respaldo completo y Emulator37.2.12 preparado17/10, datos/imagen preservados y Quick Boot desactivado. Arranque/retest bloqueados por restricción actual del usuario y memoria libre; no queda apartado como resolución final. Ver docs/AVD_GOOGLE_PLAY_REPAIR.md.
