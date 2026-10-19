@@ -1,6 +1,6 @@
 {
   "name": "gemidos-premium-workspace",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Herramientas de desarrollo para la app Android Gemidos PREMIUM.",
   "scripts": {

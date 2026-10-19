@@ -12,7 +12,10 @@
 # IN PROGRESS
 
 
+
 # DONE
+
+- [2026-10-19] DONE: seis familias Android compatibles actualizadas,0.1.4/build5, manifests/locks/README/notas sincronizados. Node19/19 y plan sonoro100% líneas/ramas/funciones;24JVM, seis métricas JaCoCo100% del alcance puro; lintDemoDebug y assembleDemoDebug correctos. Publicación scoped de esta entrega; sin AVD/distribución.
 
 - [2026-10-17] Preparación sin AVD del retest Google Play: respaldo completo y SHA-256 userdata/config previa, Emulator37.2.12 instalado, identidad/imagen/datos preservados y Quick Boot desactivado. Guards del harness y8 tests offline por repo (normal/-O), npm test correcto. Reparación, arranques fríos y QA del original continúan BLOCKED arriba; no es aprobación Android ni cambia versión/APK. Informe docs/AVD_GOOGLE_PLAY_REPAIR.md.
 

@@ -7,7 +7,7 @@ Aplicacion Android humoristica de reproduccion de audio. Al abrir, muestra una c
 ## Estado detectado
 
 - Ruta: `<project-root>`
-- Version de fuente: `0.1.3` (`versionCode` 4); QA AOSP del16/10 completo en su alcance, sin nueva distribución; validación del AVD Google Play original pendiente.
+- Version de fuente: `0.1.4` (`versionCode` 5); seis familias Android actualizadas y validadas localmente19/10. QA AOSP previa sólo0.1.3, sin nueva distribución; validación del AVD Google Play original pendiente.
 - Stack: Android nativo sobre Android 16 / API 36, Kotlin, Jetpack Compose y Material 3, siguiendo las convenciones verificadas de Linterna Premium sin compartir identidad tecnica.
 - Git: repositorio publico source-only `ldebortoli/gemidos-premium`, independiente del original privado preservado como gemidos-premium-private-archive.
 - Rama primaria: `main`.
