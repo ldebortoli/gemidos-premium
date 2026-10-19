@@ -206,3 +206,9 @@ No borrar decisiones anteriores. Si una decision cambia, agregar una nueva entra
 
 - Aclaración del bloque anterior: runtime-compose-android2.10.0 declara minCompile35/AGP8.6; se transcribió36/8.9.1 por error. Gradle verifica toda la resolución con compile36/AGP8.13.2.2.11 se rechazó por requerir SDK37. Las seis familias seleccionadas pasan tests/lint/build sin modificar toolchain, minSdk24, permisos ni lógica de audio/compra. Billing9.1/UMP4.0 ya actuales.
 - Revisión de corrección, simplicidad, arquitectura, seguridad y rendimiento sin hallazgos adicionales.19Node,24JVM y seis métricas JaCoCo1.00 del alcance puro; plan sonoro Node100% líneas/ramas/funciones. APK demoDebug local con audio privado aprobado, nunca versionado. Secret Scanning/Push Protection enabled verificados19/10. No trasladar cobertura al hardware/UI/SDK.
+
+## 2026-10-19 · Entrega automática privada solicitada
+
+- Lucas amplía expresamente a Gemidos PREMIUM el circuito visible de builds y APK+notas con la herramienta existente, exclusivamente Codex Logs (-1004440313456). Sustituye la exclusión anterior de envío para esta operación y destino; sin nuevos cron, AVD, tiendas ni otros destinatarios.
+- Reutilizar la versión 0.1.4/5 ya validada/publicada: el cambio de Dashboard y la operación no modifican el producto móvil. Generar demoRelease no depurable con firma QA estable, nunca reutilizar demoDebug. Codex Bot exacto, permisos, hash/commit y notas acumuladas desde último anuncio verificados por el publicador existente; entrega independiente/reanudable sin repetir el APK confirmado.
+- Publicar memoria antes de solicitar para conservar checkout limpio y SHA fijo. Después del recibo de aceptación terminar sin leer logs/porcentajes ni sondear compilación; la próxima revisión consulta una vez el resultado. No confundir queued/running con APK entregado.
